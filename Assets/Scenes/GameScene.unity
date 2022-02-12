@@ -312,8 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a388273157e0f498fbfa0d0fa20dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panSpeed: 10
-  zoomSpeed: 10
+  _cameraMovementConfigData: {fileID: 11400000, guid: c7ec6d943237ed64fa472c5787b2077a, type: 2}
 --- !u!1001 &1476240363394540495
 PrefabInstance:
   m_ObjectHideFlags: 0

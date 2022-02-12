@@ -7,12 +7,13 @@ namespace TowerDefense
     public class CameraController : MonoBehaviour
     {
         private ICameraMovement _cameraMovement;
-        public float panSpeed = 10f;
-        public float zoomSpeed = 10f;
+        
+        [SerializeField]
+        private CameraMovementConfigData _cameraMovementConfigData;
 
         private void Start()
         {
-            _cameraMovement = new DefaultCameraMovement(panSpeed, zoomSpeed);
+            _cameraMovement = new DefaultCameraMovement(_cameraMovementConfigData.PanSpeed, _cameraMovementConfigData.ZoomSpeed);
         }
 
         void Update()
