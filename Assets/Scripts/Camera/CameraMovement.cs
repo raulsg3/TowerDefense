@@ -23,19 +23,21 @@ public class CameraMovement
         ZoomSpeed = zoomSpeed;
     }
 
-    public Vector3 MoveCamera(Vector3 cameraPosition, float verticalInput, float horizontalInput, float scrollInput)
+    public Vector3 PanCamera(Vector3 cameraPosition, float xInput, float zInput)
     {
-        //Camera panning
-        float verticalTranslation = Input.GetAxis("Vertical") * _panSpeed * Time.deltaTime;
-        float horizontalTranslation = Input.GetAxis("Horizontal") * _panSpeed * Time.deltaTime;
-
-        float zoomTranslation = Input.GetAxis("Mouse ScrollWheel") * _zoomSpeed * Time.deltaTime;
-
         Vector3 newCameraPosition = cameraPosition;
 
-        newCameraPosition.x += horizontalInput * _panSpeed;
-        newCameraPosition.y -= scrollInput * _zoomSpeed;
-        newCameraPosition.z += verticalInput * _panSpeed;
+        newCameraPosition.x += xInput * _panSpeed;
+        newCameraPosition.z += zInput * _panSpeed;
+
+        return newCameraPosition;
+    }
+
+    public Vector3 ZoomCamera(Vector3 cameraPosition, float yInput)
+    {
+        Vector3 newCameraPosition = cameraPosition;
+
+        newCameraPosition.y -= yInput * _zoomSpeed;
 
         return newCameraPosition;
     }

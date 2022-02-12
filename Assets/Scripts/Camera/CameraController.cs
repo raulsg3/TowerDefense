@@ -15,12 +15,11 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        //Camera panning
         float verticalInput = Input.GetAxis("Vertical") * Time.deltaTime;
         float horizontalInput = Input.GetAxis("Horizontal") * Time.deltaTime;
         float scrollInput = Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime;
 
-        Vector3 newCameraPosition = _cameraMovement.MoveCamera(transform.position, verticalInput, horizontalInput, scrollInput);
-        transform.position = newCameraPosition;
+        Vector3 newCameraPosition = _cameraMovement.PanCamera(transform.position, horizontalInput, verticalInput);
+        transform.position = _cameraMovement.ZoomCamera(newCameraPosition, scrollInput);
     }
 }
