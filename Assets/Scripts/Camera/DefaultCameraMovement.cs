@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMovement : ICameraMovement
+public class DefaultCameraMovement : ICameraMovement
 {
     private float _panSpeed = 0f;
     private float _zoomSpeed = 0f;
@@ -17,7 +17,7 @@ public class CameraMovement : ICameraMovement
         set { _zoomSpeed = value; }
     }
 
-    public CameraMovement(float panSpeed, float zoomSpeed)
+    public DefaultCameraMovement(float panSpeed, float zoomSpeed)
     {
         PanSpeed = panSpeed;
         ZoomSpeed = zoomSpeed;

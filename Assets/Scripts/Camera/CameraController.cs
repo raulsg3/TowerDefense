@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        _cameraMovement = new CameraMovement(panSpeed, zoomSpeed);
+        _cameraMovement = new DefaultCameraMovement(panSpeed, zoomSpeed);
     }
 
     void Update()
