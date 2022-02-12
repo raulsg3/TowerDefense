@@ -4,19 +4,19 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    public class CreepMovement : MonoBehaviour
+    public abstract class CreepMovement : MonoBehaviour
     {
-        GameObject _target;
-        private float _speed = 5f;
+        protected Vector3 _targetPosition;
+        protected float _speed = 0f;
 
-        void Start()
+        public void SetSpeed(float speed)
         {
-            _target = GameObject.FindWithTag(Tags.PlayerBase);
+            _speed = speed;
         }
 
-        void Update()
+        public void SetTarget(Vector3 targetPosition)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, _speed * Time.deltaTime);
+            _targetPosition = targetPosition;
         }
     }
 }
