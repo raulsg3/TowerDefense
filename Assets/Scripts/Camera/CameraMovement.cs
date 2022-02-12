@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMovement
+public class CameraMovement : ICameraMovement
 {
     private float _panSpeed = 0f;
     private float _zoomSpeed = 0f;

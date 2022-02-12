@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private CameraMovement _cameraMovement;
+    private ICameraMovement _cameraMovement;
     public float panSpeed = 10f;
     public float zoomSpeed = 10f;
 
