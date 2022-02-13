@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    [CreateAssetMenu(menuName = "TowerDefense/Camera/Camera Movement Configuration Data", fileName = "Camera Movement Configuration Data")]
+    [CreateAssetMenu(menuName = "TowerDefense/Camera/Camera Movement Configuration Data", fileName = "CameraMovementConfigData")]
     public class CameraMovementConfigData : ScriptableObject
     {
         [SerializeField]

@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    public class CreepFactory
+    public class CreepFactory : ICreepFactory
     {
-        private CreepFactoryConfigData _creepFactoryConfigData;
+        private readonly CreepFactoryConfigData _creepFactoryConfigData;
 
         public CreepFactory(CreepFactoryConfigData creepFactoryConfigData)
         {

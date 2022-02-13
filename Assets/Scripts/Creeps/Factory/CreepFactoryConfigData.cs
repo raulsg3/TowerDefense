@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    [CreateAssetMenu(menuName = "TowerDefense/Creeps/Factory/Creep Factory Configuration Data", fileName = "Creep Factory Configuration Data")]
+    [CreateAssetMenu(menuName = "TowerDefense/Creeps/Factory/Creep Factory Configuration Data", fileName = "CreepFactoryConfigData")]
     public class CreepFactoryConfigData : ScriptableObject
     {
         [SerializeField]
@@ -25,9 +25,7 @@ namespace TowerDefense
 
         public Creep GetCreepByType(Creep.EType type)
         {
-            Creep creep;
-
-            if (!_creepsByType.TryGetValue(type, out creep))
+            if (!_creepsByType.TryGetValue(type, out var creep))
                 throw new Exception($"Creep with id {type} not found");
 
             return creep;
