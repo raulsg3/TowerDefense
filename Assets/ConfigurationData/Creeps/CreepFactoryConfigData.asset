@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CreepFactoryConfigData
   m_EditorClassIdentifier: 
   _creeps:
-  - {fileID: 6648831285795866432, guid: 79e0ea3d7aef9194b8b31e63e6449fad, type: 3}
+  - {fileID: 2739808600689344410, guid: 79e0ea3d7aef9194b8b31e63e6449fad, type: 3}

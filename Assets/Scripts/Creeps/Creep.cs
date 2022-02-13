@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    public abstract class Creep : MonoBehaviour
+    public class Creep : MonoBehaviour
     {
         public enum EType
         {

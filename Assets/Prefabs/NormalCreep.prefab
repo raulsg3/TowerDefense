@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1365938259821419100}
   - component: {fileID: 1365938259821419101}
   - component: {fileID: -2464542570037989472}
-  - component: {fileID: 6648831285795866432}
+  - component: {fileID: 2739808600689344410}
   m_Layer: 0
   m_Name: NormalCreep
   m_TagString: Untagged
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fc126cb75cbc67488bb0573e7ccac6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6648831285795866432
+--- !u!114 &2739808600689344410
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,9 +118,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1365938259821419103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc19b453a0b9f024eba10fff47ba31eb, type: 3}
+  m_Script: {fileID: 11500000, guid: c54f323d7d54e924691ea3d66d1cec0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _normalCreepsConfigData: {fileID: 11400000, guid: 3f8fe9910c6e5aa469147d023e9bb117, type: 2}
+  _typeCreepsConfigData: {fileID: 11400000, guid: 3f8fe9910c6e5aa469147d023e9bb117, type: 2}
   _creepMovement: {fileID: -2464542570037989472}
