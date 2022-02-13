@@ -402,6 +402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 776f08ac9e28ec743900a6c45b22ee56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _creepWaveConfigData: {fileID: 11400000, guid: 1a0c0a0e400acb34a83561f65344f934, type: 2}
+  _creepFactoryConfigData: {fileID: 11400000, guid: f7c9edc903c2d9245b756a912b2c3070, type: 2}
 --- !u!4 &1973687639
 Transform:
   m_ObjectHideFlags: 0
