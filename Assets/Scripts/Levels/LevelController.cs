@@ -5,36 +5,25 @@ namespace TowerDefense
 {
     public class LevelController : MonoBehaviour
     {
-        [SerializeField]
         private MultipleWavesConfigData _multipleWavesConfigData;
 
-        private MultipleWavesConfigData _multipleWavesConfigDataInstance;
-
-        [SerializeField]
-        private CreepFactoryConfigData _creepFactoryConfigData;
-
-        private ICreepFactory _creepFactory;
-        private ICreepWaveSpawner _creepWaveSpawner;
         private IWavesController _wavesController;
 
-        void Awake()
+        public void Init(MultipleWavesConfigData multipleWavesConfigDataInstance, IWavesController wavesController)
         {
-            _creepFactory = new CreepFactory(Instantiate(_creepFactoryConfigData));
-            _creepWaveSpawner = new CreepWaveSpawner(_creepFactory, this);
-
-            _multipleWavesConfigDataInstance = Instantiate(_multipleWavesConfigData);
-            _wavesController = new WavesController(_multipleWavesConfigDataInstance, _creepWaveSpawner);
+            _multipleWavesConfigData = multipleWavesConfigDataInstance;
+            _wavesController = wavesController;
         }
 
-        void Start()
+        public void StartLevel()
         {
-            StartCoroutine(StartLevel());
+            StartCoroutine(PlayLevel());
         }
 
-        private IEnumerator StartLevel()
+        private IEnumerator PlayLevel()
         {
-            WaitForSeconds initialWait = new WaitForSeconds(_multipleWavesConfigDataInstance.InitialWaitingTime);
-            WaitForSeconds waitBetweenWaves = new WaitForSeconds(_multipleWavesConfigDataInstance.TimeBetweenWaves);
+            WaitForSeconds initialWait = new WaitForSeconds(_multipleWavesConfigData.InitialWaitingTime);
+            WaitForSeconds waitBetweenWaves = new WaitForSeconds(_multipleWavesConfigData.TimeBetweenWaves);
 
             yield return initialWait;
 
