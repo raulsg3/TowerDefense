@@ -15,14 +15,14 @@ namespace TowerDefense
         public EType Type => _type;
 
         [SerializeField]
-        private NormalCreepsConfigData _normalCreepsConfigData;
+        private TypeCreepsConfigData _typeCreepsConfigData;
 
         [SerializeField]
         private CreepMovement _creepMovement;
 
         public void Init(Vector3 targetPosition)
         {
-            _creepMovement.SetSpeed(_normalCreepsConfigData.Speed);
+            _creepMovement.SetSpeed(_typeCreepsConfigData.Speed);
             _creepMovement.SetTarget(targetPosition);
         }
     }

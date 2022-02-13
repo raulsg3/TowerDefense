@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    [CreateAssetMenu(menuName = "TowerDefense/Creeps/Normal Creeps Configuration Data", fileName = "Normal Creeps Configuration Data")]
-    public class NormalCreepsConfigData : ScriptableObject
+    [CreateAssetMenu(menuName = "TowerDefense/Creeps/Type Creeps Configuration Data", fileName = "TypeCreepsConfigData")]
+    public class TypeCreepsConfigData : ScriptableObject
     {
         [SerializeField]
         private float _speed = 0f;
