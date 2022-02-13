@@ -11,7 +11,7 @@ namespace TowerDefense
         [SerializeField]
         private CameraMovementConfigData _cameraMovementConfigData;
 
-        private void Start()
+        void Start()
         {
             _cameraMovement = new DefaultCameraMovement(_cameraMovementConfigData.PanSpeed, _cameraMovementConfigData.ZoomSpeed);
         }
