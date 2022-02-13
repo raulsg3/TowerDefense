@@ -5,15 +5,19 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    public class CreepFactory : MonoBehaviour
+    public class CreepFactory
     {
-        [SerializeField]
         private CreepFactoryConfigData _creepFactoryConfigData;
 
-        public Creep CreateCreep(Creep.EType type)
+        public CreepFactory(CreepFactoryConfigData creepFactoryConfigData)
+        {
+            _creepFactoryConfigData = creepFactoryConfigData;
+        }
+
+        public Creep Create(Creep.EType type)
         {
             Creep creepPrefab = _creepFactoryConfigData.GetCreepByType(type);
-            return Instantiate(creepPrefab);
+            return GameObject.Instantiate(creepPrefab);
         }
     }
 }
