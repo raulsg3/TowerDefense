@@ -6,39 +6,19 @@ namespace TowerDefense
 {
     public class CreepWaveSpawner : ICreepWaveSpawner
     {
-        [SerializeField]
-        private CreepWaveConfigData _creepWaveConfigData;
-
-        private CreepWaveConfigData _creepWaveConfigDataInstance;
-
-        [SerializeField]
-        private CreepFactoryConfigData _creepFactoryConfigData;
-
         private ICreepFactory _creepFactory;
 
-        public CreepWaveSpawner(ICreepFactory creepFactory)
+        private readonly MonoBehaviour _monoBehaviourReference;
+
+        public CreepWaveSpawner(ICreepFactory creepFactory, MonoBehaviour monoBehaviourReference)
         {
             _creepFactory = creepFactory;
+            _monoBehaviourReference = monoBehaviourReference;
         }
 
-        void Start()
+        public void StartWaveSpawn(CreepWave creepWave)
         {
-            _creepWaveConfigDataInstance = Instantiate(_creepWaveConfigData);
-            _creepFactory = new CreepFactory(Instantiate(_creepFactoryConfigData));
-        }
-
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                CreepWave creepWave = _creepWaveConfigDataInstance.GetCreepWave();
-                StartWaveSpawn(creepWave);
-            }
-        }
-
-        public override void StartWaveSpawn(CreepWave creepWave)
-        {
-            StartCoroutine(SpawnWave(creepWave));
+            _monoBehaviourReference.StartCoroutine(SpawnWave(creepWave));
         }
 
         private IEnumerator SpawnWave(CreepWave creepWave)

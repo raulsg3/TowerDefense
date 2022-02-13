@@ -2,8 +2,8 @@
 
 namespace TowerDefense
 {
-    public abstract class ICreepWaveSpawner : MonoBehaviour
+    public interface ICreepWaveSpawner
     {
-        public abstract void StartWaveSpawn(CreepWave creepWave);
+        public void StartWaveSpawn(CreepWave creepWave);
     }
 }

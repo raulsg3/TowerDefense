@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    [CreateAssetMenu(menuName = "TowerDefense/Creeps/Factory/Creep Wave Configuration Data", fileName = "CreepWaveConfigData")]
+    [CreateAssetMenu(menuName = "TowerDefense/Creeps/Waves/Creep Wave Configuration Data", fileName = "CreepWaveConfigData")]
     public class CreepWaveConfigData : ScriptableObject
     {
         [SerializeField]

@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 1973687639}
   - component: {fileID: 1973687638}
   m_Layer: 0
-  m_Name: CreepWaveSpawner
+  m_Name: LevelController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -399,10 +399,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1973687637}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 776f08ac9e28ec743900a6c45b22ee56, type: 3}
+  m_Script: {fileID: 11500000, guid: 3600fae764148f4449996dfd35760e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _creepWaveConfigData: {fileID: 11400000, guid: 1a0c0a0e400acb34a83561f65344f934, type: 2}
+  _multipleWavesConfigData: {fileID: 11400000, guid: e6fe95ec5c76e88498354b5f417411da, type: 2}
   _creepFactoryConfigData: {fileID: 11400000, guid: f7c9edc903c2d9245b756a912b2c3070, type: 2}
 --- !u!4 &1973687639
 Transform:

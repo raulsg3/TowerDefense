@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1365938259821419091}
   - component: {fileID: 1365938259821419100}
   - component: {fileID: 1365938259821419101}
-  - component: {fileID: -2464542570037989472}
   - component: {fileID: 2739808600689344410}
+  - component: {fileID: 2649727339991854065}
   m_Layer: 0
   m_Name: NormalCreep
   m_TagString: Untagged
@@ -97,18 +97,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-2464542570037989472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1365938259821419103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fc126cb75cbc67488bb0573e7ccac6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2739808600689344410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,4 +111,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 0
   _typeCreepsConfigData: {fileID: 11400000, guid: 3f8fe9910c6e5aa469147d023e9bb117, type: 2}
-  _creepMovement: {fileID: -2464542570037989472}
+  _creepMovement: {fileID: 2649727339991854065}
+--- !u!114 &2649727339991854065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365938259821419103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b21fdf3852dfdbb449e25b1d60c1b0d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
