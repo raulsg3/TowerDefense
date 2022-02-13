@@ -30,7 +30,7 @@ namespace TowerDefense
 
         public CreepWave GetCreepWave()
         {
-            return new CreepWave(_waveCreepsByType);
+            return new CreepWave(_waveCreepsByType, _timeBetweenCreeps);
         }
     }
 }

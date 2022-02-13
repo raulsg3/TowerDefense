@@ -43,7 +43,7 @@ namespace TowerDefense
 
         private IEnumerator SpawnWave(CreepWave creepWave)
         {
-            WaitForSeconds waitBetweenCreeps = new WaitForSeconds(_creepWaveConfigDataInstance.TimeBetweenCreeps);
+            WaitForSeconds waitBetweenCreeps = new WaitForSeconds(creepWave.TimeBetweenCreeps);
 
             foreach (var numCreepsByType in creepWave.NumCreepsByType)
             {

@@ -6,11 +6,15 @@ namespace TowerDefense
     {
         private Dictionary<Creep.EType, int> _numCreepsByType;
 
-        public Dictionary<Creep.EType, int> NumCreepsByType => _numCreepsByType;
+        private float _timeBetweenCreeps = 1f;
 
-        public CreepWave(Dictionary<Creep.EType, int> numCreepsByType)
+        public Dictionary<Creep.EType, int> NumCreepsByType => _numCreepsByType;
+        public float TimeBetweenCreeps => _timeBetweenCreeps;
+
+        public CreepWave(Dictionary<Creep.EType, int> numCreepsByType, float timeBetweenCreeps)
         {
             _numCreepsByType = numCreepsByType;
+            _timeBetweenCreeps = timeBetweenCreeps;
         }
     }
 }
