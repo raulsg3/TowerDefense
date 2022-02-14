@@ -13,7 +13,7 @@ namespace TowerDefense
 
         public bool IsDead()
         {
-            return (_health > 0);
+            return (_health <= 0);
         }
 
         public void TakeDamage(float damage)

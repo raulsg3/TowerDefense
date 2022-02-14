@@ -4,13 +4,18 @@ namespace TowerDefense
 {
     public abstract class PlayerStructureHealth : IHealth
     {
-        void OnTriggerEnter(Collider other)
+        protected void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(Tags.Creep))
             {
-                if (TryGetComponent(out Creep creep))
+                if (other.gameObject.TryGetComponent(out Creep creep))
                 {
                     TakeDamage(creep.Damage);
+                }
+
+                if (other.gameObject.TryGetComponent(out CreepHealth creepHealth))
+                {
+                    creepHealth.Die();
                 }
             }
         }

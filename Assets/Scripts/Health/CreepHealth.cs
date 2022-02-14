@@ -2,11 +2,11 @@
 
 namespace TowerDefense
 {
-    public class PlayerBaseHealth : PlayerStructureHealth
+    public class CreepHealth : IHealth
     {
         public override void Die()
         {
-            Debug.Log("PlayerBase destroyed");
+            Destroy(this.gameObject);
         }
     }
 }

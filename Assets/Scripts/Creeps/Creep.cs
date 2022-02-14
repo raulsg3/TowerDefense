@@ -18,6 +18,9 @@ namespace TowerDefense
         [SerializeField]
         private ICreepMovement _creepMovement;
 
+        [SerializeField]
+        private IHealth _creepHealth;
+
         public EType Type => _type;
 
         public float Damage => _typeCreepsConfigData.Damage;
@@ -26,6 +29,8 @@ namespace TowerDefense
         {
             _creepMovement.SetSpeed(_typeCreepsConfigData.Speed);
             _creepMovement.SetTarget(targetPosition);
+
+            _creepHealth.SetHealth(_typeCreepsConfigData.Health);
         }
     }
 }
