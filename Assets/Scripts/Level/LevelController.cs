@@ -9,6 +9,16 @@ namespace TowerDefense
 
         private IWavesController _wavesController;
 
+        void OnEnable()
+        {
+            EventManagerSingleton.Instance.OnPlayerBaseDestroyed += PlayerBaseDestroyed;
+        }
+
+        void OnDisable()
+        {
+            EventManagerSingleton.Instance.OnPlayerBaseDestroyed -= PlayerBaseDestroyed;
+        }
+
         public void Init(MultipleWavesConfigData multipleWavesConfigDataInstance, IWavesController wavesController)
         {
             _multipleWavesConfigData = multipleWavesConfigDataInstance;
@@ -32,6 +42,11 @@ namespace TowerDefense
                 _wavesController.StartNextWave();
                 yield return waitBetweenWaves;
             }
+        }
+
+        private void PlayerBaseDestroyed()
+        {
+            Debug.Log("GAME OVER");
         }
     }
 }

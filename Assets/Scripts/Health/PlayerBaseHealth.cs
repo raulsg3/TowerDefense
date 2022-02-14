@@ -6,7 +6,7 @@ namespace TowerDefense
     {
         public override void Die()
         {
-            Debug.Log("PlayerBase destroyed");
+            EventManagerSingleton.Instance.PlayerBaseDestroyed();
         }
     }
 }
