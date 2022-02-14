@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    public abstract class CreepMovement : MonoBehaviour
+    public abstract class ICreepMovement : MonoBehaviour
     {
         protected Vector3 _targetPosition;
         protected float _speed = 0f;

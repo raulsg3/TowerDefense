@@ -18,7 +18,7 @@ namespace TowerDefense
         private TypeCreepsConfigData _typeCreepsConfigData;
 
         [SerializeField]
-        private CreepMovement _creepMovement;
+        private ICreepMovement _creepMovement;
 
         public void Init(Vector3 targetPosition)
         {

@@ -28,8 +28,10 @@ namespace TowerDefense
 
         private void InitLevel()
         {
+            GameObject _playerBase = GameObject.FindWithTag(Tags.PlayerBase);
+
             _creepFactory = new CreepFactory(Instantiate(_creepFactoryConfigData));
-            _creepWaveSpawner = new CreepWaveSpawner(_creepFactory, this);
+            _creepWaveSpawner = new CreepWaveSpawner(_creepFactory, this, _playerBase.transform.position);
 
             _multipleWavesConfigDataInstance = Instantiate(_multipleWavesConfigData);
             _wavesController = new WavesController(_multipleWavesConfigDataInstance, _creepWaveSpawner);

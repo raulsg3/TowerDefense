@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    public class CreepMovementGround : CreepMovement
+    public class CreepMovementGround : ICreepMovement
     {
         void Update()
         {

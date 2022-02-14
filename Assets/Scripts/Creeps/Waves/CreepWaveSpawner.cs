@@ -10,10 +10,18 @@ namespace TowerDefense
 
         private readonly MonoBehaviour _monoBehaviourReference;
 
-        public CreepWaveSpawner(ICreepFactory creepFactory, MonoBehaviour monoBehaviourReference)
+        private Vector3 _targetPosition;
+
+        public CreepWaveSpawner(ICreepFactory creepFactory, MonoBehaviour monoBehaviourReference, Vector3 targetPosition)
         {
             _creepFactory = creepFactory;
             _monoBehaviourReference = monoBehaviourReference;
+            _targetPosition = targetPosition;
+        }
+
+        public void SetTargetPosition(Vector3 targetPosition)
+        {
+            _targetPosition = targetPosition;
         }
 
         public void StartWaveSpawn(CreepWave creepWave)
@@ -29,7 +37,8 @@ namespace TowerDefense
             {
                 for (int creep = 0; creep < numCreepsByType.Value; ++creep)
                 {
-                    _creepFactory.Create(numCreepsByType.Key);
+                    Creep newCreep = _creepFactory.Create(numCreepsByType.Key);
+                    newCreep.Init(_targetPosition);
                     yield return waitBetweenCreeps;
                 }
             }

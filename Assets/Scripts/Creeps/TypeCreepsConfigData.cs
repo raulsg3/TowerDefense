@@ -8,13 +8,13 @@ namespace TowerDefense
     public class TypeCreepsConfigData : ScriptableObject
     {
         [SerializeField]
-        private float _speed = 0f;
+        private float _speed = 1f;
 
         [SerializeField]
         private float _health = 1f;
 
         [SerializeField]
-        private float _damage = 0f;
+        private float _damage = 1f;
 
         public float Speed => _speed;
         public float Health => _health;
