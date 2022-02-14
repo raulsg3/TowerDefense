@@ -6,17 +6,21 @@ namespace TowerDefense
 {
     public class CreepWaveSpawner : ICreepWaveSpawner
     {
-        private ICreepFactory _creepFactory;
+        private readonly ICreepFactory _creepFactory;
 
-        private readonly MonoBehaviour _monoBehaviourReference;
+        private readonly ISpawnPointsController _spawnPointsController;
 
         private Vector3 _targetPosition;
 
-        public CreepWaveSpawner(ICreepFactory creepFactory, MonoBehaviour monoBehaviourReference, Vector3 targetPosition)
+        private readonly MonoBehaviour _monoBehaviourReference;
+
+        public CreepWaveSpawner(ICreepFactory creepFactory, ISpawnPointsController spawnPointsController,
+            Vector3 targetPosition, MonoBehaviour monoBehaviourReference)
         {
             _creepFactory = creepFactory;
-            _monoBehaviourReference = monoBehaviourReference;
+            _spawnPointsController = spawnPointsController;
             _targetPosition = targetPosition;
+            _monoBehaviourReference = monoBehaviourReference;
         }
 
         public void SetTargetPosition(Vector3 targetPosition)
@@ -38,6 +42,7 @@ namespace TowerDefense
                 for (int creep = 0; creep < numCreepsByType.Value; ++creep)
                 {
                     Creep newCreep = _creepFactory.Create(numCreepsByType.Key);
+                    newCreep.transform.position = _spawnPointsController.GetRandomSpawnPoint();
                     newCreep.Init(_targetPosition);
                     yield return waitBetweenCreeps;
                 }

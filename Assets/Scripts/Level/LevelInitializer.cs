@@ -14,7 +14,12 @@ namespace TowerDefense
         private CreepFactoryConfigData _creepFactoryConfigData;
 
         [SerializeField]
+        private SpawnPointsConfigData _spawnPointsConfigData;
+
+        [SerializeField]
         private LevelController _levelController;
+
+        private ISpawnPointsController _spawnPointsController;
 
         private ICreepFactory _creepFactory;
         private ICreepWaveSpawner _creepWaveSpawner;
@@ -30,8 +35,10 @@ namespace TowerDefense
         {
             GameObject _playerBase = GameObject.FindWithTag(Tags.PlayerBase);
 
+            _spawnPointsController = new SpawnPointsController(Instantiate(_spawnPointsConfigData));
+
             _creepFactory = new CreepFactory(Instantiate(_creepFactoryConfigData));
-            _creepWaveSpawner = new CreepWaveSpawner(_creepFactory, this, _playerBase.transform.position);
+            _creepWaveSpawner = new CreepWaveSpawner(_creepFactory, _spawnPointsController, _playerBase.transform.position, this);
 
             _multipleWavesConfigDataInstance = Instantiate(_multipleWavesConfigData);
             _wavesController = new WavesController(_multipleWavesConfigDataInstance, _creepWaveSpawner);
