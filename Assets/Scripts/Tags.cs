@@ -7,5 +7,6 @@ namespace TowerDefense
     public static class Tags
     {
         public static string PlayerBase = "PlayerBase";
+        public static string Creep = "Creep";
     }
 }

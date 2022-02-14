@@ -9,20 +9,10 @@ namespace TowerDefense
         private float _panSpeed = 0f;
         private float _zoomSpeed = 0f;
 
-        public float PanSpeed
-        {
-            set { _panSpeed = value; }
-        }
-
-        public float ZoomSpeed
-        {
-            set { _zoomSpeed = value; }
-        }
-
         public DefaultCameraMovement(float panSpeed, float zoomSpeed)
         {
-            PanSpeed = panSpeed;
-            ZoomSpeed = zoomSpeed;
+            _panSpeed = panSpeed;
+            _zoomSpeed = zoomSpeed;
         }
 
         public Vector3 PanCamera(Vector3 cameraPosition, float xInput, float zInput)

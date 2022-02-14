@@ -10,12 +10,12 @@ namespace TowerDefense
         [SerializeField]
         private float _timeBetweenCreeps = 1f;
 
-        public float TimeBetweenCreeps => _timeBetweenCreeps;
-
         [SerializeField]
         private Creep.EType[] _waveCreeps;
 
         private Dictionary<Creep.EType, int> _waveCreepsByType;
+
+        public float TimeBetweenCreeps => _timeBetweenCreeps;
 
         void Awake()
         {

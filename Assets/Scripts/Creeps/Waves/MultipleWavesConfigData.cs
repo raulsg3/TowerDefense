@@ -10,17 +10,17 @@ namespace TowerDefense
         [SerializeField]
         private float _initialWaitingTime = 5f;
 
-        public float InitialWaitingTime => _initialWaitingTime;
-
         [SerializeField]
         private float _timeBetweenWaves = 10f;
-
-        public float TimeBetweenWaves => _timeBetweenWaves;
 
         [SerializeField]
         private CreepWaveConfigData[] _waves;
 
         private CreepWaveConfigData[] _wavesInstances;
+
+        public float InitialWaitingTime => _initialWaitingTime;
+
+        public float TimeBetweenWaves => _timeBetweenWaves;
 
         public CreepWaveConfigData[] Waves => _waves;
 
