@@ -17,6 +17,9 @@ namespace TowerDefense
         private SpawnPointsConfigData _spawnPointsConfigData;
 
         [SerializeField]
+        private PlayerStructuresConfigData _playerStructuresConfigData;
+
+        [SerializeField]
         private LevelController _levelController;
 
         private ISpawnPointsController _spawnPointsController;
@@ -34,6 +37,11 @@ namespace TowerDefense
         private void InitLevel()
         {
             GameObject _playerBase = GameObject.FindWithTag(Tags.PlayerBase);
+
+            if (_playerBase.TryGetComponent(out PlayerBaseHealth playerBaseHealth))
+            {
+                playerBaseHealth.SetHealth(Instantiate(_playerStructuresConfigData).BaseHealth);
+            }
 
             _spawnPointsController = new SpawnPointsController(Instantiate(_spawnPointsConfigData));
 
