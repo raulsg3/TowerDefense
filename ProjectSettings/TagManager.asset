@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerBase
   - Creep
+  - Ground
   layers:
   - Default
   - TransparentFX
