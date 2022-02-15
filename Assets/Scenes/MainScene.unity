@@ -485,6 +485,7 @@ MonoBehaviour:
   _creepFactoryConfigData: {fileID: 11400000, guid: f7c9edc903c2d9245b756a912b2c3070, type: 2}
   _spawnPointsConfigData: {fileID: 11400000, guid: 964298872f915ab489a12d17726f43d2, type: 2}
   _playerBaseConfigData: {fileID: 11400000, guid: 9a1f35cc296740848899a6d6d554b3b3, type: 2}
+  _turretFactoryConfigData: {fileID: 11400000, guid: 401d99e69b3afed4a836e16c0eef3a67, type: 2}
   _levelController: {fileID: 1973687638}
 --- !u!1 &1973687637
 GameObject:

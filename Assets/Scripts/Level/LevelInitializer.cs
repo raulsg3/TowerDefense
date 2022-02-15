@@ -5,20 +5,28 @@ namespace TowerDefense
 {
     public class LevelInitializer : MonoBehaviour
     {
+        [Header("Waves")]
         [SerializeField]
         private MultipleWavesConfigData _multipleWavesConfigData;
 
         private MultipleWavesConfigData _multipleWavesConfigDataInstance;
 
+        [Header("Creeps")]
         [SerializeField]
         private CreepFactoryConfigData _creepFactoryConfigData;
 
         [SerializeField]
         private SpawnPointsConfigData _spawnPointsConfigData;
 
+        [Header("")]
         [SerializeField]
         private PlayerBaseConfigData _playerBaseConfigData;
 
+        [Header("Turrets")]
+        [SerializeField]
+        private TurretFactoryConfigData _turretFactoryConfigData;
+
+        [Header("")]
         [SerializeField]
         private LevelController _levelController;
 
@@ -27,6 +35,10 @@ namespace TowerDefense
         private ICreepFactory _creepFactory;
         private ICreepWaveSpawner _creepWaveSpawner;
         private IWavesController _wavesController;
+
+        private ITurretFactory _turretFactory;
+        private ITurretSpawner _turretSpawner;
+        private ITurretController _turretController;
 
         void Awake()
         {
@@ -42,6 +54,10 @@ namespace TowerDefense
             {
                 playerBaseHealth.SetHealth(Instantiate(_playerBaseConfigData).Health);
             }
+
+            _turretFactory = new TurretFactory(Instantiate(_turretFactoryConfigData));
+            _turretSpawner = new TurretSpawner(_turretFactory);
+            _turretController = new TurretController(_turretSpawner);
 
             _spawnPointsController = new SpawnPointsController(Instantiate(_spawnPointsConfigData));
 
