@@ -17,7 +17,7 @@ namespace TowerDefense
         private SpawnPointsConfigData _spawnPointsConfigData;
 
         [SerializeField]
-        private PlayerStructuresConfigData _playerStructuresConfigData;
+        private PlayerBaseConfigData _playerBaseConfigData;
 
         [SerializeField]
         private LevelController _levelController;
@@ -40,7 +40,7 @@ namespace TowerDefense
 
             if (_playerBase.TryGetComponent(out PlayerBaseHealth playerBaseHealth))
             {
-                playerBaseHealth.SetHealth(Instantiate(_playerStructuresConfigData).BaseHealth);
+                playerBaseHealth.SetHealth(Instantiate(_playerBaseConfigData).Health);
             }
 
             _spawnPointsController = new SpawnPointsController(Instantiate(_spawnPointsConfigData));

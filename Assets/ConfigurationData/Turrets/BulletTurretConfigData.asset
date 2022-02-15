@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8789fe641ce0ab40a3031e6c67410f8, type: 3}
-  m_Name: PlayerStructuresConfigData
+  m_Script: {fileID: 11500000, guid: ea8cac1abe06d9d41b36fbb1a1627b8f, type: 3}
+  m_Name: BulletTurretConfigData
   m_EditorClassIdentifier: 
-  _baseHealth: 5
+  _health: 3
+  _cooldownTime: 1
+  _range: 3
+  _bulletDamage: 1
