@@ -67,7 +67,7 @@ namespace TowerDefense
             _multipleWavesConfigDataInstance = Instantiate(_multipleWavesConfigData);
             _wavesController = new WavesController(_multipleWavesConfigDataInstance, _creepWaveSpawner);
 
-            _levelController.Init(_multipleWavesConfigDataInstance, _wavesController);
+            _levelController.Init(_multipleWavesConfigDataInstance, _wavesController, _turretController);
         }
 
         private void StartLevel()

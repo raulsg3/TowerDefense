@@ -8,21 +8,26 @@ namespace TowerDefense
         private MultipleWavesConfigData _multipleWavesConfigData;
 
         private IWavesController _wavesController;
+        private ITurretController _turretController;
 
-        void OnEnable()
+        private void OnEnable()
         {
-            EventManagerSingleton.Instance.OnPlayerBaseDestroyed += PlayerBaseDestroyed;
+            EventManagerSingleton.Instance.OnPlayerBaseDestroyed += EndGame;
+            EventManagerSingleton.Instance.OnTurretPositionChosen += TryPlaceTurret;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
-            EventManagerSingleton.Instance.OnPlayerBaseDestroyed -= PlayerBaseDestroyed;
+            EventManagerSingleton.Instance.OnPlayerBaseDestroyed -= EndGame;
+            EventManagerSingleton.Instance.OnTurretPositionChosen -= TryPlaceTurret;
         }
 
-        public void Init(MultipleWavesConfigData multipleWavesConfigDataInstance, IWavesController wavesController)
+        public void Init(MultipleWavesConfigData multipleWavesConfigDataInstance, IWavesController wavesController,
+            ITurretController turretController)
         {
             _multipleWavesConfigData = multipleWavesConfigDataInstance;
             _wavesController = wavesController;
+            _turretController = turretController;
         }
 
         public void StartLevel()
@@ -44,9 +49,17 @@ namespace TowerDefense
             }
         }
 
-        private void PlayerBaseDestroyed()
+        private void EndGame()
         {
             Debug.Log("GAME OVER");
+        }
+
+        private void TryPlaceTurret(Vector3 turretPosition)
+        {
+            bool turretPlaced = _turretController.PlaceTurret(turretPosition);
+
+            if (turretPlaced)
+                EventManagerSingleton.Instance.SetTurretPlacing(false);
         }
     }
 }

@@ -8,5 +8,6 @@ namespace TowerDefense
     {
         public static string PlayerBase = "PlayerBase";
         public static string Creep = "Creep";
+        public static string Ground = "Ground";
     }
 }
