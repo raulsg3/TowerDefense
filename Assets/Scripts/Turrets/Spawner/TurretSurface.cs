@@ -12,21 +12,22 @@ namespace TowerDefense
 
         private void Start()
         {
-            EventManagerSingleton.Instance.OnSetTurretPlacing += EnableTurretSurface;
+            EventManagerSingleton.Instance.OnTurretPlacingActivated += ActivateTurretSurface;
+            EventManagerSingleton.Instance.OnTurretPlacingDeactivated += DeactivateTurretSurface;
 
-            _placeholderTurret = Instantiate(_placeholderTurretPrefab);
-            _placeholderTurretRenderer = _placeholderTurret.GetComponent<Renderer>();
+            ActivateTurretSurface();
         }
 
         private void OnDestroy()
         {
-            EventManagerSingleton.Instance.OnSetTurretPlacing -= EnableTurretSurface;
+            EventManagerSingleton.Instance.OnTurretPlacingActivated -= ActivateTurretSurface;
+            EventManagerSingleton.Instance.OnTurretPlacingDeactivated -= DeactivateTurretSurface;
         }
 
         private void OnMouseEnter()
         {
             if (enabled)
-                EnablePlaceholderTurretRenderer(true);
+                EnablePlaceholderTurretRenderer();
         }
 
         private void OnMouseOver()
@@ -58,18 +59,35 @@ namespace TowerDefense
         private void OnMouseExit()
         {
             if (enabled)
-                EnablePlaceholderTurretRenderer(false);
+                DisablePlaceholderTurretRenderer();
         }
 
-        private void EnableTurretSurface(bool enable)
+        private void ActivateTurretSurface()
         {
-            enabled = enable;
-            EnablePlaceholderTurretRenderer(enable);
+            enabled = true;
+
+            _placeholderTurret = Instantiate(_placeholderTurretPrefab);
+            _placeholderTurretRenderer = _placeholderTurret.GetComponent<Renderer>();
         }
 
-        private void EnablePlaceholderTurretRenderer(bool enable)
+        private void DeactivateTurretSurface()
         {
-            _placeholderTurretRenderer.enabled = enable;
+            enabled = false;
+
+            _placeholderTurretRenderer = null;
+
+            Destroy(_placeholderTurret);
+            _placeholderTurret = null;
+        }
+
+        private void EnablePlaceholderTurretRenderer()
+        {
+            _placeholderTurretRenderer.enabled = true;
+        }
+
+        private void DisablePlaceholderTurretRenderer()
+        {
+            _placeholderTurretRenderer.enabled = false;
         }
     }
 }

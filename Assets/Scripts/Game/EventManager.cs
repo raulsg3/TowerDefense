@@ -20,11 +20,18 @@ namespace TowerDefense
             OnPlayerBaseDestroyed?.Invoke();
         }
 
-        public event Action<bool> OnSetTurretPlacing;
+        public event Action OnTurretPlacingActivated;
 
-        public void SetTurretPlacing(bool active)
+        public void ActivateTurretPlacing()
         {
-            OnSetTurretPlacing?.Invoke(active);
+            OnTurretPlacingActivated?.Invoke();
+        }
+
+        public event Action OnTurretPlacingDeactivated;
+
+        public void DeactivateTurretPlacing()
+        {
+            OnTurretPlacingDeactivated?.Invoke();
         }
 
         public event Action<Vector3> OnTurretPositionChosen;
