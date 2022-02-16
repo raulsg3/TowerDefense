@@ -36,6 +36,8 @@ namespace TowerDefense
         {
             CreepWave creepWave = _wavesConfigData.GetCreepWave(_currentWaveIndex);
             _creepWaveSpawner.StartWaveSpawn(creepWave);
+
+            _currentWaveIndex++;
         }
     }
 }
