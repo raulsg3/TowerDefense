@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c4b7dcfa6eab147bc03c62aa1d1cbf, type: 3}
   m_Name: MultiWaveConfigData
   m_EditorClassIdentifier: 
-  _initialWaitingTime: 2
-  _timeBetweenWaves: 5
+  _initialWaitingTime: 3
+  _timeBetweenWaves: 6
   _waves:
   - {fileID: 11400000, guid: ba820a0cb3c97a244863adcbf793fc6b, type: 2}
   - {fileID: 11400000, guid: ba820a0cb3c97a244863adcbf793fc6b, type: 2}

@@ -569,6 +569,7 @@ MonoBehaviour:
   _type: 0
   _turretHealth: {fileID: 6123432651032028610}
   _bulletTurretConfigData: {fileID: 11400000, guid: acb60fbb87e3eb749bfbce93d6e1991f, type: 2}
+  _bulletPrefab: {fileID: 8619098770775420969, guid: 5aa2da6c052b41d43a999137b4188f25, type: 3}
 --- !u!1 &3464454265525851883
 GameObject:
   m_ObjectHideFlags: 0

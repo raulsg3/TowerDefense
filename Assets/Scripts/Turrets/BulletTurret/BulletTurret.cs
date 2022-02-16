@@ -7,8 +7,8 @@ namespace TowerDefense
         [SerializeField]
         private BulletTurretConfigData _bulletTurretConfigData;
 
-        public float Damage => _bulletTurretConfigData.BulletDamage;
-
+        [SerializeField]
+        private GameObject _bulletPrefab;
 
         public override void Init()
         {
@@ -25,9 +25,22 @@ namespace TowerDefense
             return _bulletTurretConfigData.RotationSpeed;
         }
 
+        public override float GetAimAngleThreshold()
+        {
+            return _bulletTurretConfigData.AimAngleThreshold;
+        }
+
         public override float GetCooldownTime()
         {
             return _bulletTurretConfigData.CooldownTime;
+        }
+
+        public override void ShootTarget()
+        {
+            GameObject bulletInstance = Instantiate(_bulletPrefab, transform.position, transform.rotation);
+
+            if (bulletInstance.TryGetComponent<Bullet>(out var bullet))
+                bullet.ShootAt(_currentTarget.transform.position);
         }
     }
 }

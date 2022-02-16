@@ -29,10 +29,11 @@ namespace TowerDefense
         public abstract void Init();
 
         public abstract float GetTargetSearchTime();
-
         public abstract float GetRotationSpeed();
-
+        public abstract float GetAimAngleThreshold();
         public abstract float GetCooldownTime();
+
+        public abstract void ShootTarget();
 
         private void Start()
         {
@@ -48,7 +49,7 @@ namespace TowerDefense
             {
                 if (!IsOnCooldown() && IsTargetAimed())
                 {
-                    Debug.Log("SHOOT");
+                    ShootTarget();
                     ResetCooldown();
                 }
                 else
@@ -87,7 +88,7 @@ namespace TowerDefense
 
             if (_targetDirection != Vector3.zero)
             {
-                if (Vector3.Angle(transform.forward, _targetDirection) < 10f)
+                if (Vector3.Angle(transform.forward, _targetDirection) < GetAimAngleThreshold())
                     targetAimed = true;
             }
 
@@ -96,7 +97,10 @@ namespace TowerDefense
 
         private void AimTarget()
         {
-            _targetDirection = (_currentTarget.transform.position - transform.position).normalized;
+            _targetDirection = _currentTarget.transform.position - transform.position;
+            _targetDirection.y = 0;
+            _targetDirection = _targetDirection.normalized;
+
             _targetLookRotation = Quaternion.LookRotation(_targetDirection);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, _targetLookRotation, Time.deltaTime * GetRotationSpeed());

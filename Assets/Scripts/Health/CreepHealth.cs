@@ -8,5 +8,18 @@ namespace TowerDefense
         {
             Destroy(this.gameObject);
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag(Tags.Projectile))
+            {
+                if (other.gameObject.TryGetComponent(out Bullet bullet))
+                {
+                    TakeDamage(bullet.Damage);
+                }
+
+                Destroy(other.gameObject);
+            }
+        }
     }
 }

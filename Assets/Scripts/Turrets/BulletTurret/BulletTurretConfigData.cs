@@ -15,13 +15,10 @@ namespace TowerDefense
         private float _rotationSpeed = 1f;
 
         [SerializeField]
+        private float _aimAngleThreshold = 10f;
+
+        [SerializeField]
         private float _cooldownTime = 1f;
-
-        [SerializeField]
-        private float _range = 1f;
-
-        [SerializeField]
-        private float _bulletDamage = 1f;
 
         public float Health => _health;
 
@@ -29,11 +26,8 @@ namespace TowerDefense
 
         public float RotationSpeed => _rotationSpeed;
 
+        public float AimAngleThreshold => _aimAngleThreshold;
+
         public float CooldownTime => _cooldownTime;
-
-        public float Range => _range;
-
-        public float BulletDamage => _bulletDamage;
     }
 }
-
