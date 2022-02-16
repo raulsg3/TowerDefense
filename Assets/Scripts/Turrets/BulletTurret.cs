@@ -24,5 +24,10 @@ namespace TowerDefense
         {
             return _bulletTurretConfigData.RotationSpeed;
         }
+
+        public override float GetCooldownTime()
+        {
+            return _bulletTurretConfigData.CooldownTime;
+        }
     }
 }

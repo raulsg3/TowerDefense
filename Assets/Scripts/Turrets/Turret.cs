@@ -21,8 +21,10 @@ namespace TowerDefense
 
         protected Creep _currentTarget = null;
 
-        private Vector3 _targetDirection;
-        private Quaternion _targetLookRotation;
+        private Vector3 _targetDirection = Vector3.zero;
+        private Quaternion _targetLookRotation = Quaternion.identity;
+
+        private float _remainingCooldownTime = 0f;
 
         public abstract void Init();
 
@@ -30,18 +32,24 @@ namespace TowerDefense
 
         public abstract float GetRotationSpeed();
 
+        public abstract float GetCooldownTime();
+
         private void Start()
         {
+            ResetCooldown();
             StartCoroutine(SearchForTarget());
         }
 
         private void Update()
         {
+            _remainingCooldownTime -= Time.deltaTime;
+
             if (_currentTarget != null)
             {
-                if (IsTargetAimed())
+                if (!IsOnCooldown() && IsTargetAimed())
                 {
-                    //
+                    Debug.Log("SHOOT");
+                    ResetCooldown();
                 }
                 else
                 {
@@ -50,7 +58,7 @@ namespace TowerDefense
             }
             else
             {
-                AimTarget();
+                SearchForNearestTarget();
             }
         }
 
@@ -75,7 +83,15 @@ namespace TowerDefense
 
         private bool IsTargetAimed()
         {
-            return false;
+            bool targetAimed = false;
+
+            if (_targetDirection != Vector3.zero)
+            {
+                if (Vector3.Angle(transform.forward, _targetDirection) < 10f)
+                    targetAimed = true;
+            }
+
+            return targetAimed;
         }
 
         private void AimTarget()
@@ -84,6 +100,16 @@ namespace TowerDefense
             _targetLookRotation = Quaternion.LookRotation(_targetDirection);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, _targetLookRotation, Time.deltaTime * GetRotationSpeed());
+        }
+
+        private void ResetCooldown()
+        {
+            _remainingCooldownTime = GetCooldownTime();
+        }
+
+        private bool IsOnCooldown()
+        {
+            return (_remainingCooldownTime > 0f);
         }
     }
 }
