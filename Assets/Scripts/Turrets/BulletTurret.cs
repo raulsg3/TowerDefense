@@ -9,6 +9,7 @@ namespace TowerDefense
 
         public float Damage => _bulletTurretConfigData.BulletDamage;
 
+
         public override void Init()
         {
             _turretHealth.SetHealth(_bulletTurretConfigData.Health);
@@ -17,6 +18,11 @@ namespace TowerDefense
         public override float GetTargetSearchTime()
         {
             return _bulletTurretConfigData.TargetSearchTime;
+        }
+
+        public override float GetRotationSpeed()
+        {
+            return _bulletTurretConfigData.RotationSpeed;
         }
     }
 }

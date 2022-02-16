@@ -12,6 +12,9 @@ namespace TowerDefense
         private float _targetSearchTime = 1f;
 
         [SerializeField]
+        private float _rotationSpeed = 1f;
+
+        [SerializeField]
         private float _cooldownTime = 1f;
 
         [SerializeField]
@@ -23,6 +26,8 @@ namespace TowerDefense
         public float Health => _health;
 
         public float TargetSearchTime => _targetSearchTime;
+
+        public float RotationSpeed => _rotationSpeed;
 
         public float CooldownTime => _cooldownTime;
 

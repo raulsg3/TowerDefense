@@ -17,17 +17,41 @@ namespace TowerDefense
         [SerializeField]
         protected IHealth _turretHealth;
 
+        public EType Type => _type;
+
         protected Creep _currentTarget = null;
 
-        public EType Type => _type;
+        private Vector3 _targetDirection;
+        private Quaternion _targetLookRotation;
 
         public abstract void Init();
 
         public abstract float GetTargetSearchTime();
 
-        protected void Start()
+        public abstract float GetRotationSpeed();
+
+        private void Start()
         {
             StartCoroutine(SearchForTarget());
+        }
+
+        private void Update()
+        {
+            if (_currentTarget != null)
+            {
+                if (IsTargetAimed())
+                {
+                    //
+                }
+                else
+                {
+                    AimTarget();
+                }
+            }
+            else
+            {
+                AimTarget();
+            }
         }
 
         private IEnumerator SearchForTarget()
@@ -47,6 +71,19 @@ namespace TowerDefense
             GameObject nearestTarget = FindUtils.FindClosestGameObject(creeps, transform.position);
 
             nearestTarget?.TryGetComponent<Creep>(out _currentTarget);
+        }
+
+        private bool IsTargetAimed()
+        {
+            return false;
+        }
+
+        private void AimTarget()
+        {
+            _targetDirection = (_currentTarget.transform.position - transform.position).normalized;
+            _targetLookRotation = Quaternion.LookRotation(_targetDirection);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, _targetLookRotation, Time.deltaTime * GetRotationSpeed());
         }
     }
 }
