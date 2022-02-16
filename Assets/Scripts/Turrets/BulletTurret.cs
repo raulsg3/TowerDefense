@@ -13,5 +13,10 @@ namespace TowerDefense
         {
             _turretHealth.SetHealth(_bulletTurretConfigData.Health);
         }
+
+        public override float GetTargetSearchTime()
+        {
+            return _bulletTurretConfigData.TargetSearchTime;
+        }
     }
 }
