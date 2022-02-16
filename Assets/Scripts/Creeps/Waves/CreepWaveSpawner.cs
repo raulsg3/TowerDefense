@@ -47,7 +47,6 @@ namespace TowerDefense
                     yield return waitBetweenCreeps;
                 }
             }
-
         }
     }
 }

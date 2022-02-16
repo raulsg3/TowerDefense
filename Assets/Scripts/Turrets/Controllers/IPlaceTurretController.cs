@@ -2,7 +2,7 @@
 
 namespace TowerDefense
 {
-    public interface ITurretController
+    public interface IPlaceTurretController
     {
         public bool IsPlacingTurret();
 

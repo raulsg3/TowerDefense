@@ -8,7 +8,7 @@ namespace TowerDefense
         private MultipleWavesConfigData _multipleWavesConfigData;
 
         private IWavesController _wavesController;
-        private ITurretController _turretController;
+        private IPlaceTurretController _turretController;
 
         private void OnEnable()
         {
@@ -23,7 +23,7 @@ namespace TowerDefense
         }
 
         public void Init(MultipleWavesConfigData multipleWavesConfigDataInstance, IWavesController wavesController,
-            ITurretController turretController)
+            IPlaceTurretController turretController)
         {
             _multipleWavesConfigData = multipleWavesConfigDataInstance;
             _wavesController = wavesController;
@@ -59,7 +59,7 @@ namespace TowerDefense
             bool turretPlaced = _turretController.PlaceTurret(turretPosition);
 
             if (turretPlaced)
-                EventManagerSingleton.Instance.SetTurretPlacing(false);
+                EventManagerSingleton.Instance.DeactivateTurretPlacing();
         }
     }
 }

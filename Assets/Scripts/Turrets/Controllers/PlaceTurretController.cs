@@ -2,13 +2,13 @@
 
 namespace TowerDefense
 {
-    public class TurretController : ITurretController
+    public class PlaceTurretController : IPlaceTurretController
     {
         private ITurretSpawner _turretSpawner;
 
         private Turret.EType _currentTurretType = Turret.EType.Bullets;
 
-        public TurretController(ITurretSpawner turretSpawner)
+        public PlaceTurretController(ITurretSpawner turretSpawner)
         {
             _turretSpawner = turretSpawner;
         }

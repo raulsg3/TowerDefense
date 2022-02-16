@@ -38,7 +38,7 @@ namespace TowerDefense
 
         private ITurretFactory _turretFactory;
         private ITurretSpawner _turretSpawner;
-        private ITurretController _turretController;
+        private IPlaceTurretController _turretController;
 
         void Awake()
         {
@@ -57,7 +57,7 @@ namespace TowerDefense
 
             _turretFactory = new TurretFactory(Instantiate(_turretFactoryConfigData));
             _turretSpawner = new TurretSpawner(_turretFactory);
-            _turretController = new TurretController(_turretSpawner);
+            _turretController = new PlaceTurretController(_turretSpawner);
 
             _spawnPointsController = new SpawnPointsController(Instantiate(_spawnPointsConfigData));
 
