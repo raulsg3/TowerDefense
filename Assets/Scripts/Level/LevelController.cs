@@ -54,14 +54,21 @@ namespace TowerDefense
             PerformGameCompleted();
         }
 
+        private void PauseLevel()
+        {
+            Time.timeScale = 0;
+        }
+
         private void PerformGameOver()
         {
             _uiController.ShowGameOver();
+            PauseLevel();
         }
 
         private void PerformGameCompleted()
         {
             _uiController.ShowGameCompleted();
+            PauseLevel();
         }
 
         private void TryPlaceTurret(Vector3 turretPosition)
