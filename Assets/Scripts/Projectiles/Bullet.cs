@@ -3,23 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+namespace TowerDefense
 {
-    [SerializeField]
-    private BulletConfigData _bulletConfigData;
-
-    public float Damage => _bulletConfigData.Damage;
-
-    private Vector3 _direction = Vector3.zero;
-
-    public void ShootAt(Vector3 targetPosition)
+    public class Bullet : MonoBehaviour, IProjectile
     {
-        _direction = targetPosition - transform.position;
-        Destroy(this.gameObject, _bulletConfigData.DestroyTime);
-    }
+        [SerializeField]
+        private BulletConfigData _bulletConfigData;
 
-    private void Update()
-    {
-        transform.position += _direction * Time.deltaTime * _bulletConfigData.Speed;
+        public float Damage => _bulletConfigData.Damage;
+
+        private Vector3 _direction = Vector3.zero;
+
+        public void ShootAt(Vector3 targetPosition)
+        {
+            _direction = targetPosition - transform.position;
+            Destroy(this.gameObject, _bulletConfigData.DestroyTime);
+        }
+
+        private void Update()
+        {
+            transform.position += _direction * Time.deltaTime * _bulletConfigData.Speed;
+        }
     }
 }
