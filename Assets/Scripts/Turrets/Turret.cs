@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    public abstract class Turret : MonoBehaviour
+    public abstract class Turret : MonoBehaviour, ITurretShoot
     {
         public enum EType
         {
@@ -21,19 +21,19 @@ namespace TowerDefense
 
         protected Creep _currentTarget = null;
 
-        private Vector3 _targetDirection = Vector3.zero;
-        private Quaternion _targetLookRotation = Quaternion.identity;
-
         private float _remainingCooldownTime = 0f;
 
         public abstract void Init();
 
         public abstract float GetTargetSearchTime();
-        public abstract float GetRotationSpeed();
-        public abstract float GetAimAngleThreshold();
+
         public abstract float GetCooldownTime();
 
+        public abstract bool CanShoot();
+
         public abstract void ShootTarget();
+
+        public abstract void WaitUntilCanShoot();
 
         private void Start()
         {
@@ -47,14 +47,14 @@ namespace TowerDefense
 
             if (_currentTarget != null)
             {
-                if (!IsOnCooldown() && IsTargetAimed())
+                if (!IsOnCooldown() && CanShoot())
                 {
                     ShootTarget();
                     ResetCooldown();
                 }
                 else
                 {
-                    AimTarget();
+                    WaitUntilCanShoot();
                 }
             }
             else
@@ -80,30 +80,6 @@ namespace TowerDefense
             GameObject nearestTarget = FindUtils.FindClosestGameObject(creeps, transform.position);
 
             nearestTarget?.TryGetComponent<Creep>(out _currentTarget);
-        }
-
-        private bool IsTargetAimed()
-        {
-            bool targetAimed = false;
-
-            if (_targetDirection != Vector3.zero)
-            {
-                if (Vector3.Angle(transform.forward, _targetDirection) < GetAimAngleThreshold())
-                    targetAimed = true;
-            }
-
-            return targetAimed;
-        }
-
-        private void AimTarget()
-        {
-            _targetDirection = _currentTarget.transform.position - transform.position;
-            _targetDirection.y = 0;
-            _targetDirection = _targetDirection.normalized;
-
-            _targetLookRotation = Quaternion.LookRotation(_targetDirection);
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, _targetLookRotation, Time.deltaTime * GetRotationSpeed());
         }
 
         private void ResetCooldown()
