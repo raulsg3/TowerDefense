@@ -537,14 +537,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1004236347, guid: 063c5a892b692d644858a059af3f068a, type: 3}
-      propertyPath: _turretPrefab
-      value: 
-      objectReference: {fileID: 3464454265513847245, guid: 1fbf79a143b35a14197255bce04f1fc2, type: 3}
-    - target: {fileID: 1004236347, guid: 063c5a892b692d644858a059af3f068a, type: 3}
-      propertyPath: _placeholderTurretPrefab
-      value: 
-      objectReference: {fileID: 7069765696078884763, guid: 909b2b650b6f8fc47ab9f315a06f1466, type: 3}
     - target: {fileID: 6419937009128389113, guid: 063c5a892b692d644858a059af3f068a, type: 3}
       propertyPath: m_Name
       value: Ground

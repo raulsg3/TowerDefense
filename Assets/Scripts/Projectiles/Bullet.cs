@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     public void ShootAt(Vector3 targetPosition)
     {
         _direction = targetPosition - transform.position;
+        Destroy(this.gameObject, _bulletConfigData.DestroyTime);
     }
 
     private void Update()

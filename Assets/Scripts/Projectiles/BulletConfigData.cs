@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "TowerDefense/Turrets/Bullet Configuration Data", fileName = "BulletConfigData")]
+[CreateAssetMenu(menuName = "TowerDefense/Projectiles/Bullet Configuration Data", fileName = "BulletConfigData")]
 public class BulletConfigData : ScriptableObject
 {
     [SerializeField]
@@ -9,8 +9,13 @@ public class BulletConfigData : ScriptableObject
     [SerializeField]
     private float _damage = 1f;
 
+    [SerializeField]
+    private float _destroyTime = 3f;
+
     public float Speed => _speed;
 
     public float Damage => _damage;
+
+    public float DestroyTime => _destroyTime;
 }
 
