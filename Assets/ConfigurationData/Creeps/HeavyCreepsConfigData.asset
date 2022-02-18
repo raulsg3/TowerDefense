@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c4ffcb2e8ec35642866d23809470e3c, type: 3}
-  m_Name: BulletConfigData
+  m_Script: {fileID: 11500000, guid: 68331de34cb7ead4e9dac85732e6ac97, type: 3}
+  m_Name: HeavyCreepsConfigData
   m_EditorClassIdentifier: 
-  _speed: 3
+  _speed: 2
+  _health: 10
   _damage: 2
-  _destroyTime: 3

@@ -6,7 +6,8 @@ namespace TowerDefense
     {
         public enum EType
         {
-            Normal
+            Normal,
+            Heavy
         }
 
         [SerializeField]
