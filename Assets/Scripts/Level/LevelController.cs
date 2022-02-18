@@ -10,21 +10,24 @@ namespace TowerDefense
         private IWavesController _wavesController;
         private IPlaceTurretController _turretController;
 
+        private UIController _uiController;
+
         private void OnEnable()
         {
-            EventManagerSingleton.Instance.OnPlayerBaseDestroyed += EndGame;
+            EventManagerSingleton.Instance.OnPlayerBaseDestroyed += PerformGameOver;
             EventManagerSingleton.Instance.OnTurretPositionChosen += TryPlaceTurret;
         }
 
         private void OnDisable()
         {
-            EventManagerSingleton.Instance.OnPlayerBaseDestroyed -= EndGame;
+            EventManagerSingleton.Instance.OnPlayerBaseDestroyed -= PerformGameOver;
             EventManagerSingleton.Instance.OnTurretPositionChosen -= TryPlaceTurret;
         }
 
-        public void Init(MultipleWavesConfigData multipleWavesConfigDataInstance, IWavesController wavesController,
-            IPlaceTurretController turretController)
+        public void Init(UIController uiController, MultipleWavesConfigData multipleWavesConfigDataInstance,
+            IWavesController wavesController, IPlaceTurretController turretController)
         {
+            _uiController = uiController;
             _multipleWavesConfigData = multipleWavesConfigDataInstance;
             _wavesController = wavesController;
             _turretController = turretController;
@@ -47,11 +50,18 @@ namespace TowerDefense
                 _wavesController.StartNextWave();
                 yield return waitBetweenWaves;
             }
+
+            PerformGameCompleted();
         }
 
-        private void EndGame()
+        private void PerformGameOver()
         {
-            Debug.Log("GAME OVER");
+            _uiController.ShowGameOver();
+        }
+
+        private void PerformGameCompleted()
+        {
+            _uiController.ShowGameCompleted();
         }
 
         private void TryPlaceTurret(Vector3 turretPosition)

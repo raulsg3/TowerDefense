@@ -30,6 +30,9 @@ namespace TowerDefense
         [SerializeField]
         private LevelController _levelController;
 
+        [SerializeField]
+        private UIController _uiController;
+
         private ISpawnPointsController _spawnPointsController;
 
         private ICreepFactory _creepFactory;
@@ -67,7 +70,7 @@ namespace TowerDefense
             _multipleWavesConfigDataInstance = Instantiate(_multipleWavesConfigData);
             _wavesController = new WavesController(_multipleWavesConfigDataInstance, _creepWaveSpawner);
 
-            _levelController.Init(_multipleWavesConfigDataInstance, _wavesController, _turretController);
+            _levelController.Init(_uiController, _multipleWavesConfigDataInstance, _wavesController, _turretController);
         }
 
         private void StartLevel()
