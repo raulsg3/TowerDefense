@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace TowerDefense
 {
-    public class BulletTurret : Turret, ITurretAim
+    public class BulletTurret : Turret, ITurretTarget
     {
         [SerializeField]
         private BulletTurretConfigData _bulletTurretConfigData;
@@ -10,17 +11,13 @@ namespace TowerDefense
         [SerializeField]
         private GameObject _bulletPrefab;
 
+        private Creep _currentTarget = null;
         private Vector3 _targetDirection = Vector3.zero;
         private Quaternion _targetLookRotation = Quaternion.identity;
 
-        public override void Init()
+        public override float GetHealth()
         {
-            _turretHealth.SetHealth(_bulletTurretConfigData.Health);
-        }
-
-        public override float GetTargetSearchTime()
-        {
-            return _bulletTurretConfigData.TargetSearchTime;
+            return _bulletTurretConfigData.Health;
         }
 
         public override float GetCooldownTime()
@@ -28,12 +25,12 @@ namespace TowerDefense
             return _bulletTurretConfigData.CooldownTime;
         }
 
-        public override bool CanShoot()
+        public override bool CanPerformAction()
         {
-            return IsTargetAimed();
+            return base.CanPerformAction() && HasTarget() && IsTargetAimed();
         }
 
-        public override void ShootTarget()
+        public override void PerformAction()
         {
             GameObject bulletInstance = Instantiate(_bulletPrefab, transform.position, transform.rotation);
 
@@ -41,19 +38,45 @@ namespace TowerDefense
                 bullet.ShootAt(_currentTarget.transform.position);
         }
 
-        public override void WaitUntilCanShoot()
+        public override void WaitUntilCanPerformAction()
         {
-            AimTarget();
+            if (HasTarget())
+            {
+                AimTarget();
+            }
+            else
+            {
+                SearchForNearestTarget();
+            }
         }
 
-        private float GetRotationSpeed()
+        public bool HasTarget()
         {
-            return _bulletTurretConfigData.RotationSpeed;
+            return _currentTarget != null;
         }
 
-        private float GetAimAngleThreshold()
+        public IEnumerator SearchForTarget()
         {
-            return _bulletTurretConfigData.AimAngleThreshold;
+            WaitForSeconds waitNextTargetSearch = new WaitForSeconds(GetTargetSearchTime());
+
+            while (true)
+            {
+                SearchForNearestTarget();
+                yield return waitNextTargetSearch;
+            }
+        }
+
+        private float GetTargetSearchTime()
+        {
+            return _bulletTurretConfigData.TargetSearchTime;
+        }
+
+        private void SearchForNearestTarget()
+        {
+            GameObject[] creeps = GameObject.FindGameObjectsWithTag(Tags.Creep);
+            GameObject nearestTarget = FindUtils.FindClosestGameObject(creeps, transform.position);
+
+            nearestTarget?.TryGetComponent<Creep>(out _currentTarget);
         }
 
         public bool IsTargetAimed()
@@ -78,6 +101,22 @@ namespace TowerDefense
             _targetLookRotation = Quaternion.LookRotation(_targetDirection);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, _targetLookRotation, Time.deltaTime * GetRotationSpeed());
+        }
+
+        private float GetAimAngleThreshold()
+        {
+            return _bulletTurretConfigData.AimAngleThreshold;
+        }
+
+        private float GetRotationSpeed()
+        {
+            return _bulletTurretConfigData.RotationSpeed;
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+            StartCoroutine(SearchForTarget());
         }
     }
 }

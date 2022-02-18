@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    public abstract class Turret : MonoBehaviour, ITurretShoot
+    public abstract class Turret : MonoBehaviour, ITurret
     {
         public enum EType
         {
@@ -19,75 +19,52 @@ namespace TowerDefense
 
         public EType Type => _type;
 
-        protected Creep _currentTarget = null;
-
         private float _remainingCooldownTime = 0f;
 
-        public abstract void Init();
-
-        public abstract float GetTargetSearchTime();
+        public abstract float GetHealth();
 
         public abstract float GetCooldownTime();
 
-        public abstract bool CanShoot();
+        public abstract void PerformAction();
 
-        public abstract void ShootTarget();
+        public abstract void WaitUntilCanPerformAction();
 
-        public abstract void WaitUntilCanShoot();
-
-        private void Start()
+        public void Init()
         {
-            ResetCooldown();
-            StartCoroutine(SearchForTarget());
+            _turretHealth.SetHealth(GetHealth());
         }
 
-        private void Update()
+        public virtual bool CanPerformAction()
+        {
+            return !IsOnCooldown();
+        }
+
+        protected virtual void Start()
+        {
+            ResetCooldown();
+        }
+
+        protected virtual void Update()
         {
             _remainingCooldownTime -= Time.deltaTime;
 
-            if (_currentTarget != null)
+            if (CanPerformAction())
             {
-                if (!IsOnCooldown() && CanShoot())
-                {
-                    ShootTarget();
-                    ResetCooldown();
-                }
-                else
-                {
-                    WaitUntilCanShoot();
-                }
+                PerformAction();
+                ResetCooldown();
             }
             else
             {
-                SearchForNearestTarget();
+                WaitUntilCanPerformAction();
             }
         }
 
-        private IEnumerator SearchForTarget()
-        {
-            WaitForSeconds waitNextTargetSearch = new WaitForSeconds(GetTargetSearchTime());
-
-            while (true)
-            {
-                SearchForNearestTarget();
-                yield return waitNextTargetSearch;
-            }
-        }
-
-        private void SearchForNearestTarget()
-        {
-            GameObject[] creeps = GameObject.FindGameObjectsWithTag(Tags.Creep);
-            GameObject nearestTarget = FindUtils.FindClosestGameObject(creeps, transform.position);
-
-            nearestTarget?.TryGetComponent<Creep>(out _currentTarget);
-        }
-
-        private void ResetCooldown()
+        protected void ResetCooldown()
         {
             _remainingCooldownTime = GetCooldownTime();
         }
 
-        private bool IsOnCooldown()
+        protected bool IsOnCooldown()
         {
             return (_remainingCooldownTime > 0f);
         }
