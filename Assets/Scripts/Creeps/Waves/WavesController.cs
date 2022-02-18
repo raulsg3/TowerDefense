@@ -29,7 +29,7 @@ namespace TowerDefense
 
         public bool AreWavesRemaining()
         {
-            return (GetCurrentWaveNumber() < GetNumWaves());
+            return (GetCurrentWaveNumber() <= GetNumWaves());
         }
 
         public void StartNextWave()
