@@ -6,7 +6,7 @@ namespace TowerDefense
     {
         public override void Die()
         {
-            EventManagerSingleton.Instance.CreepEliminated();
+            EventManagerSingleton.Instance.CreepEliminated(this.gameObject.GetComponent<Creep>());
             Destroy(this.gameObject);
         }
 

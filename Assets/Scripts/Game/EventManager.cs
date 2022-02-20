@@ -55,18 +55,18 @@ namespace TowerDefense
             OnTurretPositionChosen?.Invoke(position);
         }
 
-        public event Action OnCreepSpawned;
+        public event Action<Creep> OnCreepSpawned;
 
-        public void CreepSpawned()
+        public void CreepSpawned(Creep creep)
         {
-            OnCreepSpawned?.Invoke();
+            OnCreepSpawned?.Invoke(creep);
         }
 
-        public event Action OnCreepEliminated;
+        public event Action<Creep> OnCreepEliminated;
 
-        public void CreepEliminated()
+        public void CreepEliminated(Creep creep)
         {
-            OnCreepEliminated?.Invoke();
+            OnCreepEliminated?.Invoke(creep);
         }
 
         public event Action OnAllCreepsEliminated;

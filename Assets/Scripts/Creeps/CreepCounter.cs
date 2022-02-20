@@ -29,12 +29,12 @@
             return (_numRemainingCreeps > 0);
         }
 
-        public void IncreaseCreepsRemaining()
+        public void IncreaseCreepsRemaining(Creep creep)
         {
             _numRemainingCreeps++;
         }
 
-        public void DecreaseCreepsRemaining()
+        public void DecreaseCreepsRemaining(Creep creep)
         {
             _numRemainingCreeps--;
             _numEliminatedCreeps++;
