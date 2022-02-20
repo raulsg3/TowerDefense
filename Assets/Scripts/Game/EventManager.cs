@@ -34,11 +34,11 @@ namespace TowerDefense
             OnPlayerBaseDestroyed?.Invoke();
         }
 
-        public event Action OnTurretPlacingActivated;
+        public event Action<Turret.EType> OnTurretPlacingActivated;
 
-        public void ActivateTurretPlacing()
+        public void ActivateTurretPlacing(Turret.EType turretType)
         {
-            OnTurretPlacingActivated?.Invoke();
+            OnTurretPlacingActivated?.Invoke(turretType);
         }
 
         public event Action OnTurretPlacingDeactivated;

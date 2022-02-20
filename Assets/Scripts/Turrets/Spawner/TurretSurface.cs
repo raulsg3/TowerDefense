@@ -62,7 +62,7 @@ namespace TowerDefense
                 DisablePlaceholderTurretRenderer();
         }
 
-        private void ActivateTurretSurface()
+        private void ActivateTurretSurface(Turret.EType turretType)
         {
             enabled = true;
 

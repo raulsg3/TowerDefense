@@ -23,9 +23,9 @@ namespace TowerDefense
             _wavesCountText.text = currentWave.ToString() + " / " + numWaves.ToString();
         }
 
-        public void HandlePlaceTurretButton()
+        public void HandleBulletTurretButton()
         {
-            EventManagerSingleton.Instance.ActivateTurretPlacing();
+            EventManagerSingleton.Instance.ActivateTurretPlacing(Turret.EType.Bullets);
         }
 
         public void ShowGameOver()
