@@ -15,7 +15,7 @@ namespace TowerDefense
             EventManagerSingleton.Instance.OnTurretPlacingActivated += ActivateTurretSurface;
             EventManagerSingleton.Instance.OnTurretPlacingDeactivated += DeactivateTurretSurface;
 
-            ActivateTurretSurface();
+            DeactivateTurretSurface();
         }
 
         private void OnDestroy()
@@ -76,8 +76,11 @@ namespace TowerDefense
 
             _placeholderTurretRenderer = null;
 
-            Destroy(_placeholderTurret);
-            _placeholderTurret = null;
+            if (_placeholderTurret != null)
+            {
+                Destroy(_placeholderTurret);
+                _placeholderTurret = null;
+            }
         }
 
         private void EnablePlaceholderTurretRenderer()

@@ -23,6 +23,11 @@ namespace TowerDefense
             _wavesCountText.text = currentWave.ToString() + " / " + numWaves.ToString();
         }
 
+        public void HandlePlaceTurretButton()
+        {
+            EventManagerSingleton.Instance.ActivateTurretPlacing();
+        }
+
         public void ShowGameOver()
         {
             _gameOverPanel.gameObject.SetActive(true);
@@ -35,13 +40,13 @@ namespace TowerDefense
             EventManagerSingleton.Instance.PauseGame();
         }
 
-        public void RestartButton()
+        public void HandleRestartButton()
         {
             EventManagerSingleton.Instance.ResumeGame();
             UnityEngine.SceneManagement.SceneManager.LoadScene(Scenes.MainScene);
         }
 
-        public void ExitButton()
+        public void HandleExitButton()
         {
             Application.Quit();
         }
