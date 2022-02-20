@@ -41,6 +41,7 @@ namespace TowerDefense
 
         public void StartLevel()
         {
+            UpdateHudUI();
             StartCoroutine(PlayLevel());
         }
 
@@ -54,6 +55,7 @@ namespace TowerDefense
             while (_wavesController.AreWavesRemaining())
             {
                 _wavesController.StartNextWave();
+                UpdateHudUI();
                 yield return waitBetweenWaves;
             }
 
@@ -68,6 +70,11 @@ namespace TowerDefense
         private void ResumeLevel()
         {
             Time.timeScale = 1f;
+        }
+
+        private void UpdateHudUI()
+        {
+            _uiController.UpdateWavesCount(_wavesController.GetCurrentWaveNumber(), _wavesController.GetNumWaves());
         }
 
         private void PerformGameOver()

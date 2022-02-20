@@ -1,16 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TowerDefense
 {
     public class UIController : MonoBehaviour
     {
+        [Header("Hud")]
+        [SerializeField]
+        private Text _wavesCountText = null;
+
+        [Header("Panels")]
         [SerializeField]
         private RectTransform _gameOverPanel = null;
 
         [SerializeField]
         private RectTransform _gameCompletedPanel = null;
+
+        public void UpdateWavesCount(int currentWave, int numWaves)
+        {
+            _wavesCountText.text = currentWave.ToString() + " / " + numWaves.ToString();
+        }
 
         public void ShowGameOver()
         {

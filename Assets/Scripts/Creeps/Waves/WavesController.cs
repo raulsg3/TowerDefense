@@ -19,7 +19,7 @@ namespace TowerDefense
 
         public int GetCurrentWaveNumber()
         {
-            return _currentWaveIndex + 1;
+            return _currentWaveIndex;
         }
 
         public int GetNumWaves()
@@ -29,7 +29,7 @@ namespace TowerDefense
 
         public bool AreWavesRemaining()
         {
-            return (GetCurrentWaveNumber() <= GetNumWaves());
+            return (GetCurrentWaveNumber() < GetNumWaves());
         }
 
         public void StartNextWave()
