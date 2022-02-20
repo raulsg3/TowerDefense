@@ -1929,6 +1929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wavesCountText: {fileID: 869473270}
+  _bulletTurretButton: {fileID: 300764425}
   _gameOverPanel: {fileID: 1699416862}
   _gameCompletedPanel: {fileID: 153697752}
 --- !u!4 &1292476703

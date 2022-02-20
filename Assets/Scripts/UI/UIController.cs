@@ -11,6 +11,9 @@ namespace TowerDefense
         [SerializeField]
         private Text _wavesCountText = null;
 
+        [SerializeField]
+        private Button _bulletTurretButton = null;
+
         [Header("Panels")]
         [SerializeField]
         private RectTransform _gameOverPanel = null;
@@ -30,14 +33,25 @@ namespace TowerDefense
 
         public void ShowGameOver()
         {
-            _gameOverPanel.gameObject.SetActive(true);
-            EventManagerSingleton.Instance.PauseGame();
+            ShowEndGamePanel(_gameOverPanel);
         }
 
         public void ShowGameCompleted()
         {
-            _gameCompletedPanel.gameObject.SetActive(true);
+            ShowEndGamePanel(_gameCompletedPanel);
+        }
+
+        private void ShowEndGamePanel(RectTransform panel)
+        {
+            DeactivateButtons();
+
+            panel.gameObject.SetActive(true);
             EventManagerSingleton.Instance.PauseGame();
+        }
+
+        private void DeactivateButtons()
+        {
+            _bulletTurretButton.interactable = false;
         }
 
         public void HandleRestartButton()
