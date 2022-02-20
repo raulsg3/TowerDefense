@@ -28,8 +28,7 @@ namespace TowerDefense
             EventManagerSingleton.Instance.OnPlayerBaseDestroyed -= PerformGameOver;
         }
 
-        public void Init(UIController uiController, MultipleWavesConfigData multipleWavesConfigDataInstance,
-            IWavesController wavesController)
+        public void Init(UIController uiController, MultipleWavesConfigData multipleWavesConfigDataInstance, IWavesController wavesController)
         {
             _uiController = uiController;
             _multipleWavesConfigData = multipleWavesConfigDataInstance;

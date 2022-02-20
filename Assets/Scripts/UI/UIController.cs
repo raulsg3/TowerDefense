@@ -12,6 +12,9 @@ namespace TowerDefense
         private Text _wavesCountText = null;
 
         [SerializeField]
+        private Text _coinsCountText = null;
+
+        [SerializeField]
         private Button _bulletTurretButton = null;
 
         [Header("Panels")]
@@ -24,6 +27,11 @@ namespace TowerDefense
         public void UpdateWavesCount(int currentWave, int numWaves)
         {
             _wavesCountText.text = currentWave.ToString() + " / " + numWaves.ToString();
+        }
+
+        public void UpdateCoinsCount(int coins)
+        {
+            _coinsCountText.text = coins.ToString();
         }
 
         public void HandleBulletTurretButton()

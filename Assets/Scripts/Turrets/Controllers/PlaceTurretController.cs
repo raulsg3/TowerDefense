@@ -6,11 +6,14 @@ namespace TowerDefense
     {
         private ITurretSpawner _turretSpawner;
 
+        private IEconomyController _economyController;
+
         private Turret.EType _currentTurretType = Turret.EType.Bullets;
 
-        public PlaceTurretController(ITurretSpawner turretSpawner)
+        public PlaceTurretController(ITurretSpawner turretSpawner, IEconomyController economyController)
         {
             _turretSpawner = turretSpawner;
+            _economyController = economyController;
         }
 
         public bool IsPlacingTurret()
@@ -34,7 +37,7 @@ namespace TowerDefense
 
         private bool CanPlaceTurret(Vector3 position)
         {
-            return true;
+            return _economyController.SpendCoins(5);
         }
     }
 }

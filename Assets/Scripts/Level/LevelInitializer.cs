@@ -22,11 +22,12 @@ namespace TowerDefense
         [SerializeField]
         private PlayerBaseConfigData _playerBaseConfigData;
 
-        [Header("Turrets")]
         [SerializeField]
         private TurretFactoryConfigData _turretFactoryConfigData;
 
-        [Header("")]
+        [SerializeField]
+        private EconomyConfigData _economyConfigData;
+
         [SerializeField]
         private LevelController _levelController;
 
@@ -44,6 +45,9 @@ namespace TowerDefense
         private ITurretSpawner _turretSpawner;
         private IPlaceTurretController _placeTurretController;
 
+        private Money _money;
+        private IEconomyController _economyController;
+
         private void Awake()
         {
             InitLevel();
@@ -55,6 +59,8 @@ namespace TowerDefense
 
             EventManagerSingleton.Instance.OnCreepSpawned += _creepCounter.IncreaseCreepsRemaining;
             EventManagerSingleton.Instance.OnCreepEliminated += _creepCounter.DecreaseCreepsRemaining;
+
+            EventManagerSingleton.Instance.OnCreepEliminated += _economyController.CollectCoins;
 
             StartLevel();
         }
@@ -72,13 +78,14 @@ namespace TowerDefense
             GameObject _playerBase = GameObject.FindWithTag(Tags.PlayerBase);
 
             if (_playerBase.TryGetComponent(out PlayerBaseHealth playerBaseHealth))
-            {
                 playerBaseHealth.SetHealth(Instantiate(_playerBaseConfigData).Health);
-            }
+
+            _money = new Money(Instantiate(_economyConfigData).InitialCoins);
+            _economyController = new EconomyController(_money, _uiController);
 
             _turretFactory = new TurretFactory(Instantiate(_turretFactoryConfigData));
             _turretSpawner = new TurretSpawner(_turretFactory);
-            _placeTurretController = new PlaceTurretController(_turretSpawner);
+            _placeTurretController = new PlaceTurretController(_turretSpawner, _economyController);
 
             _spawnPointsController = new SpawnPointsController(Instantiate(_spawnPointsConfigData));
 
