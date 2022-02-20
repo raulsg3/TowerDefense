@@ -11,8 +11,6 @@ namespace TowerDefense
         public PlaceTurretController(ITurretSpawner turretSpawner)
         {
             _turretSpawner = turretSpawner;
-
-            EventManagerSingleton.Instance.OnTurretPositionChosen += PlaceTurret;
         }
 
         public bool IsPlacingTurret()

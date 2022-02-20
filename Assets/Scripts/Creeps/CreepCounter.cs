@@ -7,14 +7,6 @@
 
         public CreepCounter()
         {
-            EventManagerSingleton.Instance.OnCreepSpawned += HandleCreepSpawned;
-            EventManagerSingleton.Instance.OnCreepEliminated += HandleCreepEliminated;
-        }
-
-        ~CreepCounter()
-        {
-            EventManagerSingleton.Instance.OnCreepSpawned -= HandleCreepSpawned;
-            EventManagerSingleton.Instance.OnCreepEliminated -= HandleCreepEliminated;
         }
 
         public int GetNumCreepsRemaining()
@@ -37,12 +29,12 @@
             return (_numRemainingCreeps > 0);
         }
 
-        private void HandleCreepSpawned()
+        public void IncreaseCreepsRemaining()
         {
             _numRemainingCreeps++;
         }
 
-        private void HandleCreepEliminated()
+        public void DecreaseCreepsRemaining()
         {
             _numRemainingCreeps--;
             _numEliminatedCreeps++;

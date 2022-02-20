@@ -44,10 +44,27 @@ namespace TowerDefense
         private ITurretSpawner _turretSpawner;
         private IPlaceTurretController _placeTurretController;
 
-        void Awake()
+        private void Awake()
         {
             InitLevel();
+        }
+
+        private void Start()
+        {
+            EventManagerSingleton.Instance.OnTurretPositionChosen += _placeTurretController.PlaceTurret;
+
+            EventManagerSingleton.Instance.OnCreepSpawned += _creepCounter.IncreaseCreepsRemaining;
+            EventManagerSingleton.Instance.OnCreepEliminated += _creepCounter.DecreaseCreepsRemaining;
+
             StartLevel();
+        }
+
+        private void OnDestroy()
+        {
+            EventManagerSingleton.Instance.OnTurretPositionChosen -= _placeTurretController.PlaceTurret;
+
+            EventManagerSingleton.Instance.OnCreepSpawned -= _creepCounter.IncreaseCreepsRemaining;
+            EventManagerSingleton.Instance.OnCreepEliminated -= _creepCounter.DecreaseCreepsRemaining;
         }
 
         private void InitLevel()

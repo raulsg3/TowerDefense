@@ -9,5 +9,9 @@
         public int GetNumTotalCreeps();
 
         public bool AreCreepsRemaining();
+
+        public void IncreaseCreepsRemaining();
+
+        public void DecreaseCreepsRemaining();
     }
 }
