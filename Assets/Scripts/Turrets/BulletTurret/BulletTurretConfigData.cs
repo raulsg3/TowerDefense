@@ -20,6 +20,9 @@ namespace TowerDefense
         [SerializeField]
         private float _cooldownTime = 1f;
 
+        [SerializeField]
+        private int _price = 5;
+
         public float Health => _health;
 
         public float TargetSearchTime => _targetSearchTime;
@@ -29,5 +32,7 @@ namespace TowerDefense
         public float AimAngleThreshold => _aimAngleThreshold;
 
         public float CooldownTime => _cooldownTime;
+
+        public int Price => _price;
     }
 }

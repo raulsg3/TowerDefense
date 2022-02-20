@@ -16,5 +16,11 @@ namespace TowerDefense
             Turret turretPrefab = _turretFactoryConfigData.GetTurretByType(type);
             return GameObject.Instantiate(turretPrefab);
         }
+
+        public int GetPrice(Turret.EType type)
+        {
+            Turret turretPrefab = _turretFactoryConfigData.GetTurretByType(type);
+            return turretPrefab.GetPrice();
+        }
     }
 }

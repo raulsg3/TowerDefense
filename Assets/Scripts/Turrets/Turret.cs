@@ -21,6 +21,8 @@ namespace TowerDefense
 
         private float _remainingCooldownTime = 0f;
 
+        public abstract int GetPrice();
+
         public abstract float GetHealth();
 
         public abstract float GetCooldownTime();

@@ -21,6 +21,11 @@ namespace TowerDefense
         private Vector3 _targetDirection = Vector3.zero;
         private Quaternion _targetLookRotation = Quaternion.identity;
 
+        public override int GetPrice()
+        {
+            return _bulletTurretConfigData.Price;
+        }
+
         public override float GetHealth()
         {
             return _bulletTurretConfigData.Health;

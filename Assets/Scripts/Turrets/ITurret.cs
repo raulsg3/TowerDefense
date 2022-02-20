@@ -2,6 +2,8 @@
 {
     public interface ITurret
     {
+        public int GetPrice();
+
         public float GetHealth();
 
         public float GetCooldownTime();
