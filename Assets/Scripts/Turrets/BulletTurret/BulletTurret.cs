@@ -52,7 +52,7 @@ namespace TowerDefense
 
         public bool HasTarget()
         {
-            return _currentTarget != null;
+            return (_currentTarget != null);
         }
 
         public IEnumerator SearchForTarget()

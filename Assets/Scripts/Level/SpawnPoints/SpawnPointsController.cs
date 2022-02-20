@@ -21,7 +21,7 @@ namespace TowerDefense
             if (GetNumSpawnPoints() == 0)
                 throw new System.Exception($"No spawn points defined");
 
-            return GetSpawnPoint(Random.Range(0, GetNumSpawnPoints() - 1));
+            return GetSpawnPoint(Random.Range(0, GetNumSpawnPoints()));
         }
 
         public Vector3 GetSpawnPoint(int spawnPointIndex)
