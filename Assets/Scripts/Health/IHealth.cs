@@ -26,15 +26,18 @@ namespace TowerDefense
 
         public void TakeDamage(float damage)
         {
-            _health -= damage;
+            if (!IsDead())
+            {
+                _health -= damage;
 
-            if (_health < 0f)
-                _health = 0f;
+                if (_health < 0f)
+                    _health = 0f;
 
-            UpdateView();
+                UpdateView();
 
-            if (IsDead())
-                Die();
+                if (IsDead())
+                    Die();
+            }
         }
 
         protected void UpdateView()

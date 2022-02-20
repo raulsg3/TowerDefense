@@ -10,7 +10,6 @@ namespace TowerDefense
 
         private IWavesController _wavesController;
         private IPlaceTurretController _placeTurretController;
-        private ICreepCounter _creepCounter;
 
         private UIController _uiController;
 
@@ -32,11 +31,10 @@ namespace TowerDefense
             EventManagerSingleton.Instance.OnTurretPositionChosen -= TryPlaceTurret;
         }
 
-        public void Init(UIController uiController, ICreepCounter creepCounter, MultipleWavesConfigData multipleWavesConfigDataInstance,
+        public void Init(UIController uiController, MultipleWavesConfigData multipleWavesConfigDataInstance,
             IWavesController wavesController, IPlaceTurretController turretController)
         {
             _uiController = uiController;
-            _creepCounter = creepCounter;
             _multipleWavesConfigData = multipleWavesConfigDataInstance;
             _wavesController = wavesController;
             _placeTurretController = turretController;
@@ -52,19 +50,32 @@ namespace TowerDefense
         {
             WaitForSeconds initialWait = new WaitForSeconds(_multipleWavesConfigData.InitialWaitingTime);
             WaitForSeconds waitBetweenWaves = new WaitForSeconds(_multipleWavesConfigData.TimeBetweenWaves);
+            WaitForSeconds waitCurrentWaveSpawning = new WaitForSeconds(0.5f);
 
             yield return initialWait;
 
+            StartNextWave();
+
             while (_wavesController.AreWavesRemaining())
             {
-                _wavesController.StartNextWave();
-                UpdateHudUI();
-
-                if (_wavesController.AreWavesRemaining())
+                if (!_wavesController.IsCurrentWaveSpawning())
+                {
                     yield return waitBetweenWaves;
+                    StartNextWave();
+                }
+                else
+                {
+                    yield return waitCurrentWaveSpawning;
+                }
             }
 
             EventManagerSingleton.Instance.OnAllCreepsEliminated += HandleAllCreepsEliminated;
+        }
+
+        private void StartNextWave()
+        {
+            _wavesController.StartNextWave();
+            UpdateHudUI();
         }
 
         private void PauseLevel()
@@ -102,7 +113,7 @@ namespace TowerDefense
 
         private void HandleAllCreepsEliminated()
         {
-            if (!_wavesController.AreWavesRemaining())
+            if (!_wavesController.AreWavesRemaining() && !_wavesController.IsCurrentWaveSpawning())
             {
                 EventManagerSingleton.Instance.OnAllCreepsEliminated -= HandleAllCreepsEliminated;
                 PerformGameCompleted();
