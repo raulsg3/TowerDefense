@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace TowerDefense
@@ -8,7 +9,8 @@ namespace TowerDefense
         private MultipleWavesConfigData _multipleWavesConfigData;
 
         private IWavesController _wavesController;
-        private IPlaceTurretController _turretController;
+        private IPlaceTurretController _placeTurretController;
+        private ICreepCounter _creepCounter;
 
         private UIController _uiController;
 
@@ -30,13 +32,14 @@ namespace TowerDefense
             EventManagerSingleton.Instance.OnTurretPositionChosen -= TryPlaceTurret;
         }
 
-        public void Init(UIController uiController, MultipleWavesConfigData multipleWavesConfigDataInstance,
+        public void Init(UIController uiController, ICreepCounter creepCounter, MultipleWavesConfigData multipleWavesConfigDataInstance,
             IWavesController wavesController, IPlaceTurretController turretController)
         {
             _uiController = uiController;
+            _creepCounter = creepCounter;
             _multipleWavesConfigData = multipleWavesConfigDataInstance;
             _wavesController = wavesController;
-            _turretController = turretController;
+            _placeTurretController = turretController;
         }
 
         public void StartLevel()
@@ -56,10 +59,12 @@ namespace TowerDefense
             {
                 _wavesController.StartNextWave();
                 UpdateHudUI();
-                yield return waitBetweenWaves;
+
+                if (_wavesController.AreWavesRemaining())
+                    yield return waitBetweenWaves;
             }
 
-            PerformGameCompleted();
+            EventManagerSingleton.Instance.OnAllCreepsEliminated += HandleAllCreepsEliminated;
         }
 
         private void PauseLevel()
@@ -89,10 +94,19 @@ namespace TowerDefense
 
         private void TryPlaceTurret(Vector3 turretPosition)
         {
-            bool turretPlaced = _turretController.PlaceTurret(turretPosition);
+            bool turretPlaced = _placeTurretController.PlaceTurret(turretPosition);
 
             if (turretPlaced)
                 EventManagerSingleton.Instance.DeactivateTurretPlacing();
+        }
+
+        private void HandleAllCreepsEliminated()
+        {
+            if (!_wavesController.AreWavesRemaining())
+            {
+                EventManagerSingleton.Instance.OnAllCreepsEliminated -= HandleAllCreepsEliminated;
+                PerformGameCompleted();
+            }
         }
     }
 }

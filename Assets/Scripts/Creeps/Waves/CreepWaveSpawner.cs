@@ -44,6 +44,9 @@ namespace TowerDefense
                     Creep newCreep = _creepFactory.Create(numCreepsByType.Key);
                     newCreep.transform.position = _spawnPointsController.GetRandomSpawnPoint();
                     newCreep.Init(_targetPosition);
+
+                    EventManagerSingleton.Instance.CreepSpawned();
+
                     yield return waitBetweenCreeps;
                 }
             }

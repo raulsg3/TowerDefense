@@ -35,13 +35,14 @@ namespace TowerDefense
 
         private ISpawnPointsController _spawnPointsController;
 
+        private ICreepCounter _creepCounter;
         private ICreepFactory _creepFactory;
         private ICreepWaveSpawner _creepWaveSpawner;
         private IWavesController _wavesController;
 
         private ITurretFactory _turretFactory;
         private ITurretSpawner _turretSpawner;
-        private IPlaceTurretController _turretController;
+        private IPlaceTurretController _placeTurretController;
 
         void Awake()
         {
@@ -60,17 +61,18 @@ namespace TowerDefense
 
             _turretFactory = new TurretFactory(Instantiate(_turretFactoryConfigData));
             _turretSpawner = new TurretSpawner(_turretFactory);
-            _turretController = new PlaceTurretController(_turretSpawner);
+            _placeTurretController = new PlaceTurretController(_turretSpawner);
 
             _spawnPointsController = new SpawnPointsController(Instantiate(_spawnPointsConfigData));
 
+            _creepCounter = new CreepCounter();
             _creepFactory = new CreepFactory(Instantiate(_creepFactoryConfigData));
             _creepWaveSpawner = new CreepWaveSpawner(_creepFactory, _spawnPointsController, _playerBase.transform.position, this);
 
             _multipleWavesConfigDataInstance = Instantiate(_multipleWavesConfigData);
             _wavesController = new WavesController(_multipleWavesConfigDataInstance, _creepWaveSpawner);
 
-            _levelController.Init(_uiController, _multipleWavesConfigDataInstance, _wavesController, _turretController);
+            _levelController.Init(_uiController, _creepCounter, _multipleWavesConfigDataInstance, _wavesController, _placeTurretController);
         }
 
         private void StartLevel()
