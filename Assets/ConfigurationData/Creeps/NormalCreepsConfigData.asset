@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: NormalCreepsConfigData
   m_EditorClassIdentifier: 
   _speed: 4
-  _health: 4
+  _health: 6
   _damage: 1

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7721dc422c311140b1471225903f3e1, type: 3}
   m_Name: NormalCreepsWaveConfigData
   m_EditorClassIdentifier: 
-  _timeBetweenCreeps: 2
-  _waveCreeps: 000000000000000000000000
+  _timeBetweenCreeps: 1
+  _waveCreeps: 0000000000000000000000000000000000000000

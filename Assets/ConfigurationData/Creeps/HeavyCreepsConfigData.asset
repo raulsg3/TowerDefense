@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HeavyCreepsConfigData
   m_EditorClassIdentifier: 
   _speed: 2
-  _health: 10
-  _damage: 2
+  _health: 12
+  _damage: 3

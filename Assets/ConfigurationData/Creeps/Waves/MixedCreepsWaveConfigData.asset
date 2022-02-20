@@ -7,13 +7,10 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea8cac1abe06d9d41b36fbb1a1627b8f, type: 3}
-  m_Name: BulletTurretConfigData
+  m_Script: {fileID: 11500000, guid: a7721dc422c311140b1471225903f3e1, type: 3}
+  m_Name: MixedCreepsWaveConfigData
   m_EditorClassIdentifier: 
-  _health: 3
-  _targetSearchTime: 0.5
-  _rotationSpeed: 3
-  _aimAngleThreshold: 10
-  _cooldownTime: 1
+  _timeBetweenCreeps: 1.5
+  _waveCreeps: 01000000000000000000000001000000
