@@ -7,5 +7,7 @@ namespace TowerDefense
         public void SetTargetPosition(Vector3 targetPosition);
 
         public void StartWaveSpawn(CreepWave creepWave);
+
+        public bool IsSpawning();
     }
 }

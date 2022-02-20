@@ -14,6 +14,8 @@ namespace TowerDefense
 
         private readonly MonoBehaviour _monoBehaviourReference;
 
+        private bool _isSpawning = false;
+
         public CreepWaveSpawner(ICreepFactory creepFactory, ISpawnPointsController spawnPointsController,
             Vector3 targetPosition, MonoBehaviour monoBehaviourReference)
         {
@@ -30,26 +32,31 @@ namespace TowerDefense
 
         public void StartWaveSpawn(CreepWave creepWave)
         {
+            _isSpawning = true;
             _monoBehaviourReference.StartCoroutine(SpawnWave(creepWave));
+        }
+
+        public bool IsSpawning()
+        {
+            return _isSpawning;
         }
 
         private IEnumerator SpawnWave(CreepWave creepWave)
         {
             WaitForSeconds waitBetweenCreeps = new WaitForSeconds(creepWave.TimeBetweenCreeps);
 
-            foreach (var numCreepsByType in creepWave.NumCreepsByType)
+            foreach (Creep.EType creepType in creepWave.Creeps)
             {
-                for (int creep = 0; creep < numCreepsByType.Value; ++creep)
-                {
-                    Creep newCreep = _creepFactory.Create(numCreepsByType.Key);
-                    newCreep.transform.position = _spawnPointsController.GetRandomSpawnPoint();
-                    newCreep.Init(_targetPosition);
+                Creep newCreep = _creepFactory.Create(creepType);
+                newCreep.transform.position = _spawnPointsController.GetRandomSpawnPoint();
+                newCreep.Init(_targetPosition);
 
-                    EventManagerSingleton.Instance.CreepSpawned();
+                EventManagerSingleton.Instance.CreepSpawned();
 
-                    yield return waitBetweenCreeps;
-                }
+                yield return waitBetweenCreeps;
             }
+
+            _isSpawning = false;
         }
     }
 }

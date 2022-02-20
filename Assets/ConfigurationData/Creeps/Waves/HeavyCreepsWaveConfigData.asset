@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7721dc422c311140b1471225903f3e1, type: 3}
-  m_Name: HeavyCreepWaveConfigData
+  m_Name: HeavyCreepsWaveConfigData
   m_EditorClassIdentifier: 
   _timeBetweenCreeps: 2
-  _waveCreeps: 0100000001000000
+  _waveCreeps: 010000000100000001000000

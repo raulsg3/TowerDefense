@@ -9,5 +9,7 @@
         public bool AreWavesRemaining();
 
         public void StartNextWave();
+
+        public bool IsCurrentWaveSpawning();
     }
 }

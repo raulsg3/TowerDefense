@@ -40,5 +40,10 @@ namespace TowerDefense
 
             _currentWaveIndex++;
         }
+
+        public bool IsCurrentWaveSpawning()
+        {
+            return _creepWaveSpawner.IsSpawning();
+        }
     }
 }

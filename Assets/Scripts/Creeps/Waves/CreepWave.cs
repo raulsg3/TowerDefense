@@ -4,16 +4,16 @@ namespace TowerDefense
 {
     public class CreepWave
     {
-        private Dictionary<Creep.EType, int> _numCreepsByType;
+        private Creep.EType[] _creeps;
 
         private float _timeBetweenCreeps = 1f;
 
-        public Dictionary<Creep.EType, int> NumCreepsByType => _numCreepsByType;
+        public Creep.EType[] Creeps => _creeps;
         public float TimeBetweenCreeps => _timeBetweenCreeps;
 
-        public CreepWave(Dictionary<Creep.EType, int> numCreepsByType, float timeBetweenCreeps)
+        public CreepWave(Creep.EType[] creeps, float timeBetweenCreeps)
         {
-            _numCreepsByType = numCreepsByType;
+            _creeps = creeps;
             _timeBetweenCreeps = timeBetweenCreeps;
         }
     }
