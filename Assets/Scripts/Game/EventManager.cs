@@ -13,6 +13,20 @@ namespace TowerDefense
         {
         }
 
+        public event Action OnPauseGame;
+
+        public void PauseGame()
+        {
+            OnPauseGame?.Invoke();
+        }
+
+        public event Action OnResumeGame;
+
+        public void ResumeGame()
+        {
+            OnResumeGame?.Invoke();
+        }
+
         public event Action OnPlayerBaseDestroyed;
 
         public void PlayerBaseDestroyed()

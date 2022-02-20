@@ -14,12 +14,18 @@ namespace TowerDefense
 
         private void OnEnable()
         {
+            EventManagerSingleton.Instance.OnPauseGame += PauseLevel;
+            EventManagerSingleton.Instance.OnResumeGame += ResumeLevel;
+
             EventManagerSingleton.Instance.OnPlayerBaseDestroyed += PerformGameOver;
             EventManagerSingleton.Instance.OnTurretPositionChosen += TryPlaceTurret;
         }
 
         private void OnDisable()
         {
+            EventManagerSingleton.Instance.OnPauseGame -= PauseLevel;
+            EventManagerSingleton.Instance.OnResumeGame -= ResumeLevel;
+
             EventManagerSingleton.Instance.OnPlayerBaseDestroyed -= PerformGameOver;
             EventManagerSingleton.Instance.OnTurretPositionChosen -= TryPlaceTurret;
         }
@@ -59,16 +65,19 @@ namespace TowerDefense
             Time.timeScale = 0;
         }
 
+        private void ResumeLevel()
+        {
+            Time.timeScale = 1f;
+        }
+
         private void PerformGameOver()
         {
             _uiController.ShowGameOver();
-            PauseLevel();
         }
 
         private void PerformGameCompleted()
         {
             _uiController.ShowGameCompleted();
-            PauseLevel();
         }
 
         private void TryPlaceTurret(Vector3 turretPosition)
