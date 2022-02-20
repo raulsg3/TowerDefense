@@ -16,9 +16,13 @@ namespace TowerDefense
         [SerializeField]
         private float _damage = 1f;
 
+        [SerializeField]
+        private int _reward = 1;
+
         public float Speed => _speed;
         public float Health => _health;
         public float Damage => _damage;
+        public int Reward => _reward;
     }
 }
 

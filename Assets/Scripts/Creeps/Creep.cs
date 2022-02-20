@@ -26,6 +26,8 @@ namespace TowerDefense
 
         public float Damage => _typeCreepsConfigData.Damage;
 
+        public int Reward => _typeCreepsConfigData.Reward;
+
         public void Init(Vector3 targetPosition)
         {
             _creepMovement.SetSpeed(_typeCreepsConfigData.Speed);
