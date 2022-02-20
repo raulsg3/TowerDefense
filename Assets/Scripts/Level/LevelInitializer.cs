@@ -71,6 +71,8 @@ namespace TowerDefense
 
             EventManagerSingleton.Instance.OnCreepSpawned -= _creepCounter.IncreaseCreepsRemaining;
             EventManagerSingleton.Instance.OnCreepEliminated -= _creepCounter.DecreaseCreepsRemaining;
+
+            EventManagerSingleton.Instance.OnCreepEliminated -= _economyController.CollectCoins;
         }
 
         private void InitLevel()
@@ -85,7 +87,7 @@ namespace TowerDefense
 
             _turretFactory = new TurretFactory(Instantiate(_turretFactoryConfigData));
             _turretSpawner = new TurretSpawner(_turretFactory);
-            _placeTurretController = new PlaceTurretController(_turretSpawner, _economyController);
+            _placeTurretController = new PlaceTurretController(_turretSpawner, _turretFactory, _economyController);
 
             _spawnPointsController = new SpawnPointsController(Instantiate(_spawnPointsConfigData));
 

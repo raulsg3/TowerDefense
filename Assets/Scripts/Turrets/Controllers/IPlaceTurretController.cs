@@ -8,6 +8,8 @@ namespace TowerDefense
 
         public void SetTurretTypeToPlace(Turret.EType type);
 
+        public bool CanPlaceTurret(Turret.EType type);
+
         public void PlaceTurret(Vector3 position);
     }
 }
