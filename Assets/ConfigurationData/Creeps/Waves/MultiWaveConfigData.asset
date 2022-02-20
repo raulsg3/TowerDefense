@@ -16,6 +16,5 @@ MonoBehaviour:
   _timeBetweenWaves: 5
   _waves:
   - {fileID: 11400000, guid: ba820a0cb3c97a244863adcbf793fc6b, type: 2}
-  - {fileID: 11400000, guid: ba820a0cb3c97a244863adcbf793fc6b, type: 2}
-  - {fileID: 11400000, guid: 1f916c08e83620340ab409abb2c27145, type: 2}
   - {fileID: 11400000, guid: 94ee7fb24223d7d4784cdb6283e28adb, type: 2}
+  - {fileID: 11400000, guid: 1f916c08e83620340ab409abb2c27145, type: 2}

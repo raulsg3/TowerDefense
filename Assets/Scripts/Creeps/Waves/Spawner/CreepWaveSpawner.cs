@@ -47,13 +47,13 @@ namespace TowerDefense
 
             foreach (Creep.EType creepType in creepWave.Creeps)
             {
+                yield return waitBetweenCreeps;
+
                 Creep newCreep = _creepFactory.Create(creepType);
                 newCreep.transform.position = _spawnPointsController.GetRandomSpawnPoint();
                 newCreep.Init(_targetPosition);
 
                 EventManagerSingleton.Instance.CreepSpawned();
-
-                yield return waitBetweenCreeps;
             }
 
             _isSpawning = false;
