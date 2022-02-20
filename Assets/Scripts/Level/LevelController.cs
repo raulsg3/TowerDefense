@@ -9,7 +9,6 @@ namespace TowerDefense
         private MultipleWavesConfigData _multipleWavesConfigData;
 
         private IWavesController _wavesController;
-        private IPlaceTurretController _placeTurretController;
 
         private UIController _uiController;
 
@@ -19,7 +18,6 @@ namespace TowerDefense
             EventManagerSingleton.Instance.OnResumeGame += ResumeLevel;
 
             EventManagerSingleton.Instance.OnPlayerBaseDestroyed += PerformGameOver;
-            EventManagerSingleton.Instance.OnTurretPositionChosen += TryPlaceTurret;
         }
 
         private void OnDisable()
@@ -28,16 +26,14 @@ namespace TowerDefense
             EventManagerSingleton.Instance.OnResumeGame -= ResumeLevel;
 
             EventManagerSingleton.Instance.OnPlayerBaseDestroyed -= PerformGameOver;
-            EventManagerSingleton.Instance.OnTurretPositionChosen -= TryPlaceTurret;
         }
 
         public void Init(UIController uiController, MultipleWavesConfigData multipleWavesConfigDataInstance,
-            IWavesController wavesController, IPlaceTurretController turretController)
+            IWavesController wavesController)
         {
             _uiController = uiController;
             _multipleWavesConfigData = multipleWavesConfigDataInstance;
             _wavesController = wavesController;
-            _placeTurretController = turretController;
         }
 
         public void StartLevel()
@@ -101,14 +97,6 @@ namespace TowerDefense
         private void PerformGameCompleted()
         {
             _uiController.ShowGameCompleted();
-        }
-
-        private void TryPlaceTurret(Vector3 turretPosition)
-        {
-            bool turretPlaced = _placeTurretController.PlaceTurret(turretPosition);
-
-            if (turretPlaced)
-                EventManagerSingleton.Instance.DeactivateTurretPlacing();
         }
 
         private void HandleAllCreepsEliminated()

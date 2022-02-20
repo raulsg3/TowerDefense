@@ -11,6 +11,8 @@ namespace TowerDefense
         public PlaceTurretController(ITurretSpawner turretSpawner)
         {
             _turretSpawner = turretSpawner;
+
+            EventManagerSingleton.Instance.OnTurretPositionChosen += PlaceTurret;
         }
 
         public bool IsPlacingTurret()
@@ -23,14 +25,13 @@ namespace TowerDefense
             _currentTurretType = type;
         }
 
-        public bool PlaceTurret(Vector3 position)
+        public void PlaceTurret(Vector3 position)
         {
-            bool turretPlaced = CanPlaceTurret(position);
-
-            if (turretPlaced)
+            if (CanPlaceTurret(position))
+            {
                 _turretSpawner.SpawnTurret(_currentTurretType, position);
-
-            return turretPlaced;
+                EventManagerSingleton.Instance.DeactivateTurretPlacing();
+            }
         }
 
         private bool CanPlaceTurret(Vector3 position)
