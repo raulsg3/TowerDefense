@@ -9,6 +9,12 @@ namespace TowerDefense
         private BulletTurretConfigData _bulletTurretConfigData;
 
         [SerializeField]
+        private GameObject _aimingChild;
+
+        [SerializeField]
+        private GameObject _bulletSpawnPoint;
+
+        [SerializeField]
         private GameObject _bulletPrefab;
 
         private Creep _currentTarget = null;
@@ -32,7 +38,7 @@ namespace TowerDefense
 
         public override void PerformAction()
         {
-            GameObject bulletInstance = Instantiate(_bulletPrefab, transform.position, transform.rotation);
+            GameObject bulletInstance = Instantiate(_bulletPrefab, _bulletSpawnPoint.transform.position, _bulletSpawnPoint.transform.rotation);
 
             if (bulletInstance.TryGetComponent<Bullet>(out var bullet))
                 bullet.ShootAt(_currentTarget.transform.position);
@@ -85,7 +91,7 @@ namespace TowerDefense
 
             if (_targetDirection != Vector3.zero)
             {
-                if (Vector3.Angle(transform.forward, _targetDirection) < GetAimAngleThreshold())
+                if (Vector3.Angle(_aimingChild.transform.forward, _targetDirection) < GetAimAngleThreshold())
                     targetAimed = true;
             }
 
@@ -100,7 +106,7 @@ namespace TowerDefense
 
             _targetLookRotation = Quaternion.LookRotation(_targetDirection);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, _targetLookRotation, Time.deltaTime * GetRotationSpeed());
+            _aimingChild.transform.rotation = Quaternion.Slerp(_aimingChild.transform.rotation, _targetLookRotation, Time.deltaTime * GetRotationSpeed());
         }
 
         private float GetAimAngleThreshold()
