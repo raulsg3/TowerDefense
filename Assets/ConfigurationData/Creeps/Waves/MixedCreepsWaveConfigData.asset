@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7721dc422c311140b1471225903f3e1, type: 3}
   m_Name: MixedCreepsWaveConfigData
   m_EditorClassIdentifier: 
-  _timeBetweenCreeps: 1.5
-  _waveCreeps: 01000000000000000000000001000000
+  _timeBetweenCreeps: 1.25
+  _waveCreeps: 010000000100000000000000010000000100000000000000010000000000000000000000

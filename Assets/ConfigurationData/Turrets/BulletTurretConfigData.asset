@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 3
   _targetSearchTime: 0.5
-  _rotationSpeed: 3
+  _rotationSpeed: 5
   _aimAngleThreshold: 10
   _cooldownTime: 1
+  _price: 5
