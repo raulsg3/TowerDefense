@@ -2,7 +2,7 @@
 
 namespace TowerDefense
 {
-    public class CreepHealth : IHealth
+    public class CreepHealth : Health
     {
         public override void Die()
         {

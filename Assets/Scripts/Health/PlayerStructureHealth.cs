@@ -2,7 +2,7 @@
 
 namespace TowerDefense
 {
-    public abstract class PlayerStructureHealth : IHealth
+    public abstract class PlayerStructureHealth : Health
     {
         protected void OnTriggerEnter(Collider other)
         {

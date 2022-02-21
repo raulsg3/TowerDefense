@@ -15,7 +15,7 @@ namespace TowerDefense
         protected EType _type;
 
         [SerializeField]
-        protected IHealth _turretHealth;
+        protected Health _turretHealth;
 
         public EType Type => _type;
 

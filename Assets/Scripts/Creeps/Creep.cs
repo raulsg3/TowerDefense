@@ -20,7 +20,7 @@ namespace TowerDefense
         private ICreepMovement _creepMovement;
 
         [SerializeField]
-        private IHealth _creepHealth;
+        private Health _creepHealth;
 
         public EType Type => _type;
 
