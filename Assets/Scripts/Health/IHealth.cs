@@ -4,6 +4,7 @@ namespace TowerDefense
 {
     public abstract class IHealth : MonoBehaviour
     {
+        [SerializeField]
         protected IHealthView _healthView;
 
         protected float _maxHealth = 1f;
@@ -48,11 +49,6 @@ namespace TowerDefense
         protected float CalculateHealth()
         {
             return (_health / _maxHealth);
-        }
-
-        private void Awake()
-        {
-            this.gameObject.TryGetComponent(out _healthView);
         }
     }
 }

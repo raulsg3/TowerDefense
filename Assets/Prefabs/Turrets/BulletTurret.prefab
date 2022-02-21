@@ -424,6 +424,7 @@ GameObject:
   - component: {fileID: 4410094673668303693}
   - component: {fileID: 5990213629847002689}
   - component: {fileID: 8144129915039796405}
+  - component: {fileID: 5168348848284965413}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -525,6 +526,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5168348848284965413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206333128730970046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 340605d4d99814348bd6cb91fc194f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthView: {fileID: -4521338940387594005}
+  _turretObject: {fileID: 3464454265513847245}
 --- !u!1 &1029709894854321101
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,7 +564,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029709894854321101}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.53, z: 0.02}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 924813716599088616}
@@ -564,7 +579,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3464454265513847241}
-  - component: {fileID: 6123432651032028610}
   - component: {fileID: -4521338940387594005}
   - component: {fileID: 7552694070769247988}
   m_Layer: 0
@@ -590,18 +604,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6123432651032028610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3464454265513847245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 340605d4d99814348bd6cb91fc194f49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-4521338940387594005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,7 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _turretHealth: {fileID: 6123432651032028610}
+  _turretHealth: {fileID: 5168348848284965413}
   _bulletTurretConfigData: {fileID: 11400000, guid: acb60fbb87e3eb749bfbce93d6e1991f, type: 2}
   _aimingChild: {fileID: 206333128730970046}
   _bulletSpawnPoint: {fileID: 1029709894854321101}
