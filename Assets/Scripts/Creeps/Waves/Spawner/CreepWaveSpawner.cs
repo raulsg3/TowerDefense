@@ -45,12 +45,12 @@ namespace TowerDefense
         {
             WaitForSeconds waitBetweenCreeps = new WaitForSeconds(creepWave.TimeBetweenCreeps);
 
-            foreach (Creep.EType creepType in creepWave.Creeps)
+            foreach (ICreep.EType creepType in creepWave.Creeps)
             {
                 yield return waitBetweenCreeps;
 
-                Creep newCreep = _creepFactory.Create(creepType);
-                newCreep.transform.position = _spawnPointsController.GetRandomSpawnPoint();
+                ICreep newCreep = _creepFactory.Create(creepType);
+                newCreep.Position = _spawnPointsController.GetRandomSpawnPoint();
                 newCreep.Init(_targetPosition);
 
                 EventManagerSingleton.Instance.CreepSpawned(newCreep);

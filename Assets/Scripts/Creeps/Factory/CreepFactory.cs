@@ -14,7 +14,7 @@ namespace TowerDefense
             _creepFactoryConfigData = creepFactoryConfigData;
         }
 
-        public Creep Create(Creep.EType type)
+        public ICreep Create(ICreep.EType type)
         {
             Creep creepPrefab = _creepFactoryConfigData.GetCreepByType(type);
             return GameObject.Instantiate(creepPrefab);

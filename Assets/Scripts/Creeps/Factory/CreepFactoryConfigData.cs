@@ -11,11 +11,11 @@ namespace TowerDefense
         [SerializeField]
         private Creep[] _creeps;
 
-        private Dictionary<Creep.EType, Creep> _creepsByType;
+        private Dictionary<ICreep.EType, Creep> _creepsByType;
 
         void Awake()
         {
-            _creepsByType = new Dictionary<Creep.EType, Creep>();
+            _creepsByType = new Dictionary<ICreep.EType, Creep>();
 
             foreach (Creep creep in _creeps)
             {
@@ -23,7 +23,7 @@ namespace TowerDefense
             }
         }
 
-        public Creep GetCreepByType(Creep.EType type)
+        public Creep GetCreepByType(ICreep.EType type)
         {
             if (!_creepsByType.TryGetValue(type, out var creep))
                 throw new Exception($"Creep with id {type} not found");

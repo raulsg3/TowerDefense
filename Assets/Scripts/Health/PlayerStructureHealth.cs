@@ -8,7 +8,7 @@ namespace TowerDefense
         {
             if (other.CompareTag(Tags.Creep))
             {
-                if (other.gameObject.TryGetComponent(out Creep creep))
+                if (other.gameObject.TryGetComponent(out ICreep creep))
                 {
                     TakeDamage(creep.Damage);
                 }

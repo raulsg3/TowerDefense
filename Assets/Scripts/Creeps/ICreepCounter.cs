@@ -10,8 +10,8 @@
 
         public bool AreCreepsRemaining();
 
-        public void IncreaseCreepsRemaining(Creep creep);
+        public void IncreaseCreepsRemaining(ICreep creep);
 
-        public void DecreaseCreepsRemaining(Creep creep);
+        public void DecreaseCreepsRemaining(ICreep creep);
     }
 }

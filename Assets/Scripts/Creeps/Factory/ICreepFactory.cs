@@ -2,6 +2,6 @@
 {
     public interface ICreepFactory
     {
-        public Creep Create(Creep.EType type);
+        public ICreep Create(ICreep.EType type);
     }
 }

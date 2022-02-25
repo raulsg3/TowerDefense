@@ -19,7 +19,7 @@
             return _money.Coins;
         }
 
-        public void CollectCoins(Creep creep)
+        public void CollectCoins(ICreep creep)
         {
             _money.IncreaseCoins(creep.Reward);
             UpdateView();

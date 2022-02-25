@@ -17,7 +17,7 @@ namespace TowerDefense
         [SerializeField]
         private GameObject _bulletPrefab;
 
-        private Creep _currentTarget = null;
+        private ICreep _currentTarget = null;
         private Vector3 _targetDirection = Vector3.zero;
         private Quaternion _targetLookRotation = Quaternion.identity;
 
@@ -46,7 +46,7 @@ namespace TowerDefense
             GameObject bulletInstance = Instantiate(_bulletPrefab, _bulletSpawnPoint.transform.position, _bulletSpawnPoint.transform.rotation);
 
             if (bulletInstance.TryGetComponent<Bullet>(out var bullet))
-                bullet.ShootAt(_currentTarget.transform.position);
+                bullet.ShootAt(_currentTarget.Position);
         }
 
         public override void WaitUntilCanPerformAction()
@@ -63,7 +63,8 @@ namespace TowerDefense
 
         public bool HasTarget()
         {
-            return (_currentTarget != null);
+            //The second condition checks that object _currentTarget has not been destroyed
+            return (_currentTarget != null && !_currentTarget.Equals(null));
         }
 
         public IEnumerator SearchForTarget()
@@ -87,7 +88,7 @@ namespace TowerDefense
             GameObject[] creeps = GameObject.FindGameObjectsWithTag(Tags.Creep);
             GameObject nearestTarget = FindUtils.FindClosestGameObject(creeps, transform.position);
 
-            nearestTarget?.TryGetComponent<Creep>(out _currentTarget);
+            nearestTarget?.TryGetComponent<ICreep>(out _currentTarget);
         }
 
         public bool IsTargetAimed()
@@ -105,7 +106,7 @@ namespace TowerDefense
 
         public void AimTarget()
         {
-            _targetDirection = _currentTarget.transform.position - transform.position;
+            _targetDirection = _currentTarget.Position - transform.position;
             _targetDirection.y = 0;
             _targetDirection = _targetDirection.normalized;
 

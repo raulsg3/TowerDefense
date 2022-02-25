@@ -2,16 +2,10 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    public class Creep : MonoBehaviour
+    public class Creep : MonoBehaviour, ICreep
     {
-        public enum EType
-        {
-            Normal,
-            Heavy
-        }
-
         [SerializeField]
-        private EType _type;
+        private ICreep.EType _type;
 
         [SerializeField]
         private TypeCreepsConfigData _typeCreepsConfigData;
@@ -22,11 +16,17 @@ namespace TowerDefense
         [SerializeField]
         private Health _creepHealth;
 
-        public EType Type => _type;
+        public ICreep.EType Type => _type;
 
         public float Damage => _typeCreepsConfigData.Damage;
 
         public int Reward => _typeCreepsConfigData.Reward;
+
+        public Vector3 Position
+        {
+            get { return transform.position; }
+            set { transform.position = value; }
+        }
 
         public void Init(Vector3 targetPosition)
         {

@@ -4,7 +4,7 @@
     {
         public int GetCoins();
 
-        public void CollectCoins(Creep creep);
+        public void CollectCoins(ICreep creep);
 
         public bool SpendCoins(int coins);
 

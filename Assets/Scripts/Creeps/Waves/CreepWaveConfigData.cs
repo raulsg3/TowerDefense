@@ -11,7 +11,7 @@ namespace TowerDefense
         private float _timeBetweenCreeps = 1f;
 
         [SerializeField]
-        private Creep.EType[] _waveCreeps;
+        private ICreep.EType[] _waveCreeps;
 
         public CreepWave GetCreepWave()
         {
