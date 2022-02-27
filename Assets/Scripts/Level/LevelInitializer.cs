@@ -52,6 +52,7 @@ namespace TowerDefense
 
         private void Awake()
         {
+            ServiceLocatorSingleton.Instance.ClearServices();
             InitLevel();
         }
 
