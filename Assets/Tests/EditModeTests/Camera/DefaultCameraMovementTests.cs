@@ -6,17 +6,24 @@ namespace TowerDefense.EditModeTests
 {
     public class DefaultCameraMovementTests
     {
+        readonly float _panSpeed = 10f;
+        readonly float _zoomSpeed = 10f;
+        readonly Vector3 _initialCameraPosition = new Vector3(0f, 0f, 0f);
+
+        ICameraMovement _cameraMovement = null;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _cameraMovement = new DefaultCameraMovement(_panSpeed, _zoomSpeed);
+        }
+
         [Test]
         public void PanCamera_NoInput_NoMovement()
         {
-            float panSpeed = 10f;
-            float zoomSpeed = 10f;
-            Vector3 initialCameraPosition = new Vector3(0f, 0f, 0f);
+            Vector3 newCameraPosition = _cameraMovement.PanCamera(_initialCameraPosition, 0f, 0f);
 
-            ICameraMovement cameraMovement = new DefaultCameraMovement(panSpeed, zoomSpeed);
-            Vector3 newCameraPosition = cameraMovement.PanCamera(initialCameraPosition, 0f, 0f);
-
-            Assert.AreEqual(initialCameraPosition, newCameraPosition);
+            Assert.AreEqual(_initialCameraPosition, newCameraPosition);
         }
 
         [TestCase(100f, 100f)]
@@ -24,79 +31,54 @@ namespace TowerDefense.EditModeTests
         [TestCase(1f, 5f)]
         public void PanCamera_PositiveInput_PositiveMovement(float xInput, float zInput)
         {
-            float panSpeed = 10f;
-            float zoomSpeed = 10f;
-            Vector3 initialCameraPosition = new Vector3(0f, 0f, 0f);
+            Vector3 newCameraPosition = _cameraMovement.PanCamera(_initialCameraPosition, xInput, zInput);
 
-            ICameraMovement cameraMovement = new DefaultCameraMovement(panSpeed, zoomSpeed);
-            Vector3 newCameraPosition = cameraMovement.PanCamera(initialCameraPosition, xInput, zInput);
+            Assert.AreEqual(_initialCameraPosition.x + xInput * _panSpeed, newCameraPosition.x);
+            Assert.Greater(newCameraPosition.x, _initialCameraPosition.x);
 
-            Assert.AreEqual(initialCameraPosition.x + xInput * panSpeed, newCameraPosition.x);
-            Assert.Greater(newCameraPosition.x, initialCameraPosition.x);
-
-            Assert.AreEqual(initialCameraPosition.z + zInput * panSpeed, newCameraPosition.z);
-            Assert.Greater(newCameraPosition.z, initialCameraPosition.z);
+            Assert.AreEqual(_initialCameraPosition.z + zInput * _panSpeed, newCameraPosition.z);
+            Assert.Greater(newCameraPosition.z, _initialCameraPosition.z);
         }
 
         [TestCase(-100f, -100f)]
         [TestCase(-0.001f, -0.05f)]
         public void PanCamera_NegativeInput_NegativeMovement(float xInput, float zInput)
         {
-            float panSpeed = 10f;
-            float zoomSpeed = 10f;
-            Vector3 initialCameraPosition = new Vector3(0f, 0f, 0f);
+            Vector3 newCameraPosition = _cameraMovement.PanCamera(_initialCameraPosition, xInput, zInput);
 
-            ICameraMovement cameraMovement = new DefaultCameraMovement(panSpeed, zoomSpeed);
-            Vector3 newCameraPosition = cameraMovement.PanCamera(initialCameraPosition, xInput, zInput);
+            Assert.AreEqual(_initialCameraPosition.x + xInput * _panSpeed, newCameraPosition.x);
+            Assert.Less(newCameraPosition.x, _initialCameraPosition.x);
 
-            Assert.AreEqual(initialCameraPosition.x + xInput * panSpeed, newCameraPosition.x);
-            Assert.Less(newCameraPosition.x, initialCameraPosition.x);
-
-            Assert.AreEqual(initialCameraPosition.z + zInput * panSpeed, newCameraPosition.z);
-            Assert.Less(newCameraPosition.z, initialCameraPosition.z);
+            Assert.AreEqual(_initialCameraPosition.z + zInput * _panSpeed, newCameraPosition.z);
+            Assert.Less(newCameraPosition.z, _initialCameraPosition.z);
         }
 
         [Test]
         public void ZoomCamera_NoInput_NoMovement()
         {
-            float panSpeed = 10f;
-            float zoomSpeed = 10f;
-            Vector3 initialCameraPosition = new Vector3(0f, 0f, 0f);
+            Vector3 newCameraPosition = _cameraMovement.ZoomCamera(_initialCameraPosition, 0f);
 
-            ICameraMovement cameraMovement = new DefaultCameraMovement(panSpeed, zoomSpeed);
-            Vector3 newCameraPosition = cameraMovement.ZoomCamera(initialCameraPosition, 0f);
-
-            Assert.AreEqual(initialCameraPosition, newCameraPosition);
+            Assert.AreEqual(_initialCameraPosition, newCameraPosition);
         }
 
         [TestCase(100f)]
         [TestCase(0.001f)]
         public void ZoomCamera_PositiveInput_NegativeMovement(float yInput)
         {
-            float panSpeed = 10f;
-            float zoomSpeed = 10f;
-            Vector3 initialCameraPosition = new Vector3(0f, 0f, 0f);
+            Vector3 newCameraPosition = _cameraMovement.ZoomCamera(_initialCameraPosition, yInput);
 
-            ICameraMovement cameraMovement = new DefaultCameraMovement(panSpeed, zoomSpeed);
-            Vector3 newCameraPosition = cameraMovement.ZoomCamera(initialCameraPosition, yInput);
-
-            Assert.AreEqual(initialCameraPosition.y - yInput * zoomSpeed, newCameraPosition.y);
-            Assert.Less(newCameraPosition.y, initialCameraPosition.y);
+            Assert.AreEqual(_initialCameraPosition.y - yInput * _zoomSpeed, newCameraPosition.y);
+            Assert.Less(newCameraPosition.y, _initialCameraPosition.y);
         }
 
         [TestCase(-50f)]
         [TestCase(-0.005f)]
         public void ZoomCamera_NegativeInput_PositiveMovement(float yInput)
         {
-            float panSpeed = 10f;
-            float zoomSpeed = 10f;
-            Vector3 initialCameraPosition = new Vector3(0f, 0f, 0f);
+            Vector3 newCameraPosition = _cameraMovement.ZoomCamera(_initialCameraPosition, yInput);
 
-            ICameraMovement cameraMovement = new DefaultCameraMovement(panSpeed, zoomSpeed);
-            Vector3 newCameraPosition = cameraMovement.ZoomCamera(initialCameraPosition, yInput);
-
-            Assert.AreEqual(initialCameraPosition.y - yInput * zoomSpeed, newCameraPosition.y);
-            Assert.Greater(newCameraPosition.y, initialCameraPosition.y);
+            Assert.AreEqual(_initialCameraPosition.y - yInput * _zoomSpeed, newCameraPosition.y);
+            Assert.Greater(newCameraPosition.y, _initialCameraPosition.y);
         }
     }
 }
