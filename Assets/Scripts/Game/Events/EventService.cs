@@ -3,13 +3,9 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    public class EventManagerSingleton
+    public class EventService : IEventService
     {
-        private static EventManagerSingleton _instance;
-
-        public static EventManagerSingleton Instance => _instance ?? (_instance = new EventManagerSingleton());
-
-        private EventManagerSingleton()
+        public EventService()
         {
         }
 

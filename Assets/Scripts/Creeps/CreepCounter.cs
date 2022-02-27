@@ -40,7 +40,7 @@
             _numEliminatedCreeps++;
 
             if (!AreCreepsRemaining())
-                EventManagerSingleton.Instance.AllCreepsEliminated();
+                ServiceLocatorSingleton.Instance.GetService<IEventService>().AllCreepsEliminated();
         }
     }
 }

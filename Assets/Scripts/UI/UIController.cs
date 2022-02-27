@@ -36,7 +36,7 @@ namespace TowerDefense
 
         public void HandleBulletTurretButton()
         {
-            EventManagerSingleton.Instance.ActivateTurretPlacing(Turret.EType.Bullets);
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().ActivateTurretPlacing(Turret.EType.Bullets);
         }
 
         public void ShowGameOver()
@@ -54,7 +54,7 @@ namespace TowerDefense
             DeactivateButtons();
 
             panel.gameObject.SetActive(true);
-            EventManagerSingleton.Instance.PauseGame();
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().PauseGame();
         }
 
         private void DeactivateButtons()
@@ -64,7 +64,7 @@ namespace TowerDefense
 
         public void HandleRestartButton()
         {
-            EventManagerSingleton.Instance.ResumeGame();
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().ResumeGame();
             UnityEngine.SceneManagement.SceneManager.LoadScene(Scenes.MainScene);
         }
 

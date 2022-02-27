@@ -53,7 +53,7 @@ namespace TowerDefense
                 newCreep.Position = _spawnPointsController.GetRandomSpawnPoint();
                 newCreep.Init(_targetPosition);
 
-                EventManagerSingleton.Instance.CreepSpawned(newCreep);
+                ServiceLocatorSingleton.Instance.GetService<IEventService>().CreepSpawned(newCreep);
             }
 
             _isSpawning = false;

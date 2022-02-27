@@ -34,6 +34,8 @@ namespace TowerDefense
         [SerializeField]
         private UIController _uiController;
 
+        private IEventService _eventManagerService;
+
         private ISpawnPointsController _spawnPointsController;
 
         private ICreepCounter _creepCounter;
@@ -55,24 +57,24 @@ namespace TowerDefense
 
         private void Start()
         {
-            EventManagerSingleton.Instance.OnTurretPositionChosen += _placeTurretController.PlaceTurret;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnTurretPositionChosen += _placeTurretController.PlaceTurret;
 
-            EventManagerSingleton.Instance.OnCreepSpawned += _creepCounter.IncreaseCreepsRemaining;
-            EventManagerSingleton.Instance.OnCreepEliminated += _creepCounter.DecreaseCreepsRemaining;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnCreepSpawned += _creepCounter.IncreaseCreepsRemaining;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnCreepEliminated += _creepCounter.DecreaseCreepsRemaining;
 
-            EventManagerSingleton.Instance.OnCreepEliminated += _economyController.CollectCoins;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnCreepEliminated += _economyController.CollectCoins;
 
             StartLevel();
         }
 
         private void OnDestroy()
         {
-            EventManagerSingleton.Instance.OnTurretPositionChosen -= _placeTurretController.PlaceTurret;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnTurretPositionChosen -= _placeTurretController.PlaceTurret;
 
-            EventManagerSingleton.Instance.OnCreepSpawned -= _creepCounter.IncreaseCreepsRemaining;
-            EventManagerSingleton.Instance.OnCreepEliminated -= _creepCounter.DecreaseCreepsRemaining;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnCreepSpawned -= _creepCounter.IncreaseCreepsRemaining;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnCreepEliminated -= _creepCounter.DecreaseCreepsRemaining;
 
-            EventManagerSingleton.Instance.OnCreepEliminated -= _economyController.CollectCoins;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnCreepEliminated -= _economyController.CollectCoins;
         }
 
         private void InitLevel()
@@ -81,6 +83,9 @@ namespace TowerDefense
 
             if (_playerBase.TryGetComponent(out PlayerBaseHealth playerBaseHealth))
                 playerBaseHealth.SetHealth(Instantiate(_playerBaseConfigData).Health);
+
+            _eventManagerService = new EventService();
+            ServiceLocatorSingleton.Instance.RegisterService<IEventService>(_eventManagerService);
 
             _money = new Money(Instantiate(_economyConfigData).InitialCoins);
             _economyController = new EconomyController(_money, _uiController);

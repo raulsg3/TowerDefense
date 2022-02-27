@@ -6,7 +6,7 @@ namespace TowerDefense
     {
         public override void Die()
         {
-            EventManagerSingleton.Instance.PlayerBaseDestroyed();
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().PlayerBaseDestroyed();
         }
     }
 }

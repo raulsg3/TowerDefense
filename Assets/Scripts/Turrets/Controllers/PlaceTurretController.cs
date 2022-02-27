@@ -40,7 +40,7 @@ namespace TowerDefense
             if (CanPlaceTurret(_currentTurretType))
             {
                 _turretSpawner.SpawnTurret(_currentTurretType, position);
-                EventManagerSingleton.Instance.DeactivateTurretPlacing();
+                ServiceLocatorSingleton.Instance.GetService<IEventService>().DeactivateTurretPlacing();
             }
         }
     }

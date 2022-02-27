@@ -12,16 +12,16 @@ namespace TowerDefense
 
         private void Start()
         {
-            EventManagerSingleton.Instance.OnTurretPlacingActivated += ActivateTurretSurface;
-            EventManagerSingleton.Instance.OnTurretPlacingDeactivated += DeactivateTurretSurface;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnTurretPlacingActivated += ActivateTurretSurface;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnTurretPlacingDeactivated += DeactivateTurretSurface;
 
             DeactivateTurretSurface();
         }
 
         private void OnDestroy()
         {
-            EventManagerSingleton.Instance.OnTurretPlacingActivated -= ActivateTurretSurface;
-            EventManagerSingleton.Instance.OnTurretPlacingDeactivated -= DeactivateTurretSurface;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnTurretPlacingActivated -= ActivateTurretSurface;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnTurretPlacingDeactivated -= DeactivateTurretSurface;
         }
 
         private void OnMouseEnter()
@@ -51,7 +51,7 @@ namespace TowerDefense
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    EventManagerSingleton.Instance.TurretPositionChosen(_placeholderTurret.transform.position);
+                    ServiceLocatorSingleton.Instance.GetService<IEventService>().TurretPositionChosen(_placeholderTurret.transform.position);
                 }
             }
         }

@@ -14,18 +14,18 @@ namespace TowerDefense
 
         private void OnEnable()
         {
-            EventManagerSingleton.Instance.OnPauseGame += PauseLevel;
-            EventManagerSingleton.Instance.OnResumeGame += ResumeLevel;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnPauseGame += PauseLevel;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnResumeGame += ResumeLevel;
 
-            EventManagerSingleton.Instance.OnPlayerBaseDestroyed += PerformGameOver;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnPlayerBaseDestroyed += PerformGameOver;
         }
 
         private void OnDisable()
         {
-            EventManagerSingleton.Instance.OnPauseGame -= PauseLevel;
-            EventManagerSingleton.Instance.OnResumeGame -= ResumeLevel;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnPauseGame -= PauseLevel;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnResumeGame -= ResumeLevel;
 
-            EventManagerSingleton.Instance.OnPlayerBaseDestroyed -= PerformGameOver;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnPlayerBaseDestroyed -= PerformGameOver;
         }
 
         public void Init(UIController uiController, MultipleWavesConfigData multipleWavesConfigDataInstance, IWavesController wavesController)
@@ -64,7 +64,7 @@ namespace TowerDefense
                 }
             }
 
-            EventManagerSingleton.Instance.OnAllCreepsEliminated += HandleAllCreepsEliminated;
+            ServiceLocatorSingleton.Instance.GetService<IEventService>().OnAllCreepsEliminated += HandleAllCreepsEliminated;
         }
 
         private void StartNextWave()
@@ -102,7 +102,7 @@ namespace TowerDefense
         {
             if (!_wavesController.AreWavesRemaining() && !_wavesController.IsCurrentWaveSpawning())
             {
-                EventManagerSingleton.Instance.OnAllCreepsEliminated -= HandleAllCreepsEliminated;
+                ServiceLocatorSingleton.Instance.GetService<IEventService>().OnAllCreepsEliminated -= HandleAllCreepsEliminated;
                 PerformGameCompleted();
             }
         }
