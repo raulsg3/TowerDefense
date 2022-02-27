@@ -6,14 +6,23 @@ namespace TowerDefense.EditModeTests
 {
     public class CreepCounterTests
     {
-        readonly ICreep creep = Substitute.For<ICreep>();
+        readonly ICreep _creep = Substitute.For<ICreep>();
+        readonly IEventService _eventManagerService = Substitute.For<IEventService>();
 
         ICreepCounter _creepCounter = null;
 
         [SetUp]
         public void SetUp()
         {
+            ServiceLocatorSingleton.Instance.RegisterService<IEventService>(_eventManagerService);
             _creepCounter = new CreepCounter();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            ServiceLocatorSingleton.Instance.ClearServices();
+            _eventManagerService.ClearReceivedCalls();
         }
 
         [Test]
@@ -64,7 +73,7 @@ namespace TowerDefense.EditModeTests
         public void IncreaseCreepsRemaining_IncrementsRemainingCreepsByOne()
         {
             int numCreepsRemainingBeforeIncreasing = _creepCounter.GetNumCreepsRemaining();
-            _creepCounter.IncreaseCreepsRemaining(creep);
+            _creepCounter.IncreaseCreepsRemaining(_creep);
 
             Assert.AreEqual(numCreepsRemainingBeforeIncreasing + 1, _creepCounter.GetNumCreepsRemaining());
         }
@@ -73,7 +82,7 @@ namespace TowerDefense.EditModeTests
         public void DecreaseCreepsRemaining_DecrementsRemainingCreepsByOne()
         {
             int numCreepsRemainingBeforeDecreasing = _creepCounter.GetNumCreepsRemaining();
-            _creepCounter.DecreaseCreepsRemaining(creep);
+            _creepCounter.DecreaseCreepsRemaining(_creep);
 
             Assert.AreEqual(numCreepsRemainingBeforeDecreasing - 1, _creepCounter.GetNumCreepsRemaining());
         }
@@ -82,21 +91,41 @@ namespace TowerDefense.EditModeTests
         public void DecreaseCreepsRemaining_IncrementsEliminatedCreepsByOne()
         {
             int numCreepsEliminatedBeforeDecreasing = _creepCounter.GetNumCreepsEliminated();
-            _creepCounter.DecreaseCreepsRemaining(creep);
+            _creepCounter.DecreaseCreepsRemaining(_creep);
 
             Assert.AreEqual(numCreepsEliminatedBeforeDecreasing + 1, _creepCounter.GetNumCreepsEliminated());
         }
 
-        private void IncreaseCreeps(ICreepCounter _creepCounter, int numIncreaseCalls)
+        [TestCase(1, 0)]
+        [TestCase(3, 2)]
+        public void DecreaseCreepsRemaining_CreepsRemainingIsTrue_DoesNotTriggerEventAllCreepsEliminated(int numIncreaseCalls, int numDecreaseCalls)
         {
-            for (int inc = 0; inc < numIncreaseCalls; ++inc)
-                _creepCounter.IncreaseCreepsRemaining(creep);
+            IncreaseCreeps(_creepCounter, numIncreaseCalls);
+            DecreaseCreeps(_creepCounter, numDecreaseCalls);
+
+            _eventManagerService.Received(0).AllCreepsEliminated();
         }
 
-        private void DecreaseCreeps(ICreepCounter _creepCounter, int numDecreaseCalls)
+        [TestCase(1, 1)]
+        [TestCase(2, 2)]
+        public void DecreaseCreepsRemaining_CreepsRemainingIsFalse_TriggersEventAllCreepsEliminated(int numIncreaseCalls, int numDecreaseCalls)
+        {
+            IncreaseCreeps(_creepCounter, numIncreaseCalls);
+            DecreaseCreeps(_creepCounter, numDecreaseCalls);
+
+            _eventManagerService.Received(1).AllCreepsEliminated();
+        }
+
+        private void IncreaseCreeps(ICreepCounter creepCounter, int numIncreaseCalls)
+        {
+            for (int inc = 0; inc < numIncreaseCalls; ++inc)
+                creepCounter.IncreaseCreepsRemaining(_creep);
+        }
+
+        private void DecreaseCreeps(ICreepCounter creepCounter, int numDecreaseCalls)
         {
             for (int inc = 0; inc < numDecreaseCalls; ++inc)
-                _creepCounter.DecreaseCreepsRemaining(creep);
+                creepCounter.DecreaseCreepsRemaining(_creep);
         }
     }
 }
